@@ -135,8 +135,8 @@
     }
     .btn-and:hover { border-color:var(--accent2); background:var(--soft); }
 
-    /*  PHONE MOCKUP  */
-    .hero-right { display:flex; justify-content:center; align-items:center; }
+    /* ── PHONE MOCKUP ── */
+    .hero-right { display:flex; flex-direction:column; justify-content:center; align-items:center; gap:20px; }
     .phone-scene {
       position:relative;
       animation:phoneIn 1s cubic-bezier(.34,1.56,.64,1) .3s both, phoneFloat 4s ease-in-out 1.3s infinite;
@@ -144,61 +144,71 @@
     @keyframes phoneIn { from{opacity:0;transform:translateY(60px)} to{opacity:1;transform:translateY(0)} }
     @keyframes phoneFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
     .phone-halo {
-      position:absolute; bottom:-36px; left:50%; transform:translateX(-50%);
-      width:200px; height:56px;
-      background:radial-gradient(ellipse,rgba(124,92,252,0.55) 0%,transparent 70%);
-      filter:blur(18px); pointer-events:none;
+      position:absolute; bottom:-40px; left:50%; transform:translateX(-50%);
+      width:200px; height:60px;
+      background:rgba(124,92,252,0.25); filter:blur(50px); pointer-events:none; border-radius:50%;
     }
     .phone-frame {
-      width:280px; height:580px;
-      background:linear-gradient(160deg,#1c1830 0%,#0e0b1c 100%);
-      border-radius:44px; border:1.5px solid rgba(124,92,252,0.35);
+      width:300px; height:620px; background:#0D0D0D;
+      border-radius:44px; border:1.5px solid rgba(124,92,252,0.3);
       position:relative; overflow:hidden;
-      box-shadow:inset 0 1px 0 rgba(255,255,255,0.06), 0 40px 80px rgba(0,0,0,0.65), 0 0 0 .5px rgba(0,0,0,.5);
+      box-shadow:0 80px 160px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.05), 0 0 120px rgba(124,92,252,0.15);
     }
     .phone-frame::after {
       content:''; position:absolute; inset:0; border-radius:44px;
-      background:linear-gradient(135deg,rgba(255,255,255,0.04) 0%,transparent 55%);
+      background:linear-gradient(135deg,rgba(255,255,255,0.03) 0%,transparent 50%);
       pointer-events:none; z-index:30;
     }
-    .phone-notch { position:absolute; top:0; left:50%; transform:translateX(-50%); width:108px; height:30px; background:#080810; border-radius:0 0 20px 20px; z-index:25; }
-    .phone-status { position:absolute; top:8px; left:0; right:0; display:flex; justify-content:space-between; padding:0 20px; font-size:10px; font-weight:600; color:rgba(255,255,255,.45); z-index:10; }
-    .pscreen { position:absolute; inset:0; padding:42px 18px 18px; opacity:0; transition:opacity .8s ease; }
+    .phone-notch { position:absolute; top:0; left:50%; transform:translateX(-50%); width:100px; height:28px; background:#000; border-radius:0 0 20px 20px; z-index:25; }
+    .phone-status { position:absolute; top:9px; left:0; right:0; display:flex; justify-content:space-between; padding:0 22px; font-size:11px; font-weight:600; color:rgba(255,255,255,0.7); z-index:26; }
+    .pscreen { position:absolute; inset:0; padding:46px 20px 20px; opacity:0; transition:opacity 0.6s ease; overflow:hidden; }
     .pscreen.on { opacity:1; }
 
-    /* Screen 1  Home */
-    .ps-greet { font-size:15px; font-weight:500; color:rgba(255,255,255,.9); margin-bottom:3px; }
-    .ps-date { font-size:11px; color:rgba(255,255,255,.38); margin-bottom:14px; }
-    .ps-label { font-size:9px; text-transform:uppercase; letter-spacing:1px; color:rgba(255,255,255,.35); margin-bottom:7px; }
-    .ps-moods { display:flex; gap:5px; margin-bottom:13px; }
-    .ps-em { width:40px; height:40px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:19px; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.08); }
-    .ps-em.sel { background:rgba(124,92,252,.38); border-color:rgba(124,92,252,.65); animation:emPulse 1.5s ease infinite; }
-    @keyframes emPulse { 0%,100%{box-shadow:0 0 0 0 rgba(124,92,252,.45)} 50%{box-shadow:0 0 0 6px rgba(124,92,252,0)} }
-    .ps-streak { background:rgba(251,146,60,.1); border:1px solid rgba(251,146,60,.22); border-radius:12px; padding:10px 14px; margin-bottom:13px; display:flex; align-items:center; gap:8px; }
-    .ps-streak-ico { font-size:18px; }
-    .ps-streak-txt { font-size:13px; font-weight:500; color:#fb923c; }
-    .ps-btn { display:block; width:100%; text-align:center; background:linear-gradient(135deg,var(--accent),#9b6bff); color:#fff; padding:12px; border-radius:12px; font-size:13px; font-weight:500; border:none; }
+    /* ─ Screen 1: Home ─ */
+    .ps-greet { font-family:'Syne',sans-serif; font-size:20px; font-weight:800; color:#fff; margin-bottom:4px; }
+    .ps-date { font-size:12px; color:#8b82b0; margin-bottom:24px; }
+    .ps-label { font-size:10px; text-transform:uppercase; letter-spacing:2px; color:#8b82b0; margin-bottom:10px; }
+    .ps-moods { display:flex; gap:7px; margin-bottom:16px; }
+    .ps-em { width:48px; height:48px; border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:22px; background:#1a1a2e; border:1px solid #2a2a3e; flex-shrink:0; }
+    .ps-em.sel { background:#7C5CFC; border-color:#7C5CFC; animation:emScale 1.5s ease-in-out infinite; }
+    @keyframes emScale { 0%,100%{transform:scale(1)} 50%{transform:scale(1.08)} }
+    .ps-streak { background:rgba(239,68,68,0.12); border:1px solid rgba(239,68,68,0.3); border-radius:14px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:8px; }
+    .ps-streak-txt { font-size:14px; font-weight:600; color:#f97316; }
+    .ps-btn { display:block; width:100%; text-align:center; background:#7C5CFC; color:#fff; padding:14px; border-radius:14px; font-size:15px; font-weight:600; border:none; cursor:default; }
 
-    /* Screen 2  AI Chat */
-    .ps-chat-hd { display:flex; align-items:center; gap:8px; margin-bottom:14px; padding-bottom:11px; border-bottom:1px solid rgba(255,255,255,.06); }
-    .ps-chat-ava { width:28px; height:28px; background:linear-gradient(135deg,var(--accent),#f472b6); border-radius:9px; display:flex; align-items:center; justify-content:center; font-size:14px; }
-    .ps-chat-nm { font-size:14px; font-weight:500; color:var(--text); }
+    /* ─ Screen 2: AI Chat ─ */
+    .ps-chat-hd { display:flex; align-items:center; gap:10px; margin-bottom:20px; padding-bottom:12px; border-bottom:1px solid rgba(255,255,255,0.06); }
+    .ps-chat-ava { width:32px; height:32px; background:linear-gradient(135deg,#7C5CFC,#a78bfa); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:800; color:#fff; flex-shrink:0; }
+    .ps-chat-nm { font-family:'Syne',sans-serif; font-size:16px; font-weight:800; color:#fff; }
     .chat-msgs { display:flex; flex-direction:column; gap:10px; }
-    .cb { max-width:82%; padding:9px 12px; border-radius:14px; font-size:11px; line-height:1.5; color:rgba(255,255,255,.85); }
-    .cb-ai { background:rgba(124,92,252,.2); border:1px solid rgba(124,92,252,.18); border-radius:4px 14px 14px 14px; align-self:flex-start; }
-    .cb-user { background:rgba(255,255,255,.08); border-radius:14px 14px 4px 14px; align-self:flex-end; }
+    .cb { padding:10px 14px; font-size:12px; line-height:1.5; }
+    .cb-ai { background:#1e1e30; border-radius:16px 16px 16px 4px; color:#e0d8ff; align-self:flex-start; max-width:85%; }
+    .cb-user { background:#7C5CFC; border-radius:16px 16px 4px 16px; color:#fff; align-self:flex-end; margin-left:auto; max-width:75%; }
+    .typing-dots { display:flex; align-items:center; gap:5px; background:#1e1e30; border-radius:12px; padding:10px 14px; width:fit-content; }
+    .tdot { width:6px; height:6px; border-radius:50%; background:#7C5CFC; animation:tdot 1.2s ease infinite; }
+    .tdot:nth-child(2) { animation-delay:0.2s; }
+    .tdot:nth-child(3) { animation-delay:0.4s; }
+    @keyframes tdot { 0%,100%{transform:scale(1);opacity:0.4} 40%{transform:scale(1.5);opacity:1} }
 
-    /* Screen 3  Analytics */
-    .ps-atitle { font-size:13px; font-weight:500; color:rgba(255,255,255,.85); margin-bottom:12px; }
-    .ps-bars { display:flex; align-items:flex-end; gap:5px; height:58px; margin-bottom:5px; }
-    .ps-bar { flex:1; border-radius:4px 4px 0 0; background:rgba(124,92,252,.28); }
-    .ps-bar.pk { background:var(--accent); }
-    .ps-days { display:flex; gap:5px; margin-bottom:14px; }
-    .ps-day { flex:1; text-align:center; font-size:8px; color:rgba(255,255,255,.3); }
-    .ps-rows { display:flex; flex-direction:column; gap:8px; }
-    .ps-row { display:flex; justify-content:space-between; font-size:11px; }
-    .ps-rk { color:rgba(255,255,255,.42); }
-    .ps-rv { color:var(--text); font-weight:500; }
+    /* ─ Screen 3: Analytics ─ */
+    .ps-atitle { font-family:'Syne',sans-serif; font-size:20px; font-weight:800; color:#fff; margin-bottom:4px; }
+    .ps-subtitle { font-size:12px; color:#8b82b0; margin-bottom:20px; }
+    .ps-chart { display:flex; align-items:flex-end; gap:6px; height:80px; margin-bottom:8px; }
+    .ps-cbar { width:28px; border-radius:8px 8px 0 0; background:linear-gradient(180deg,#7C5CFC 0%,rgba(167,139,250,0.25) 100%); flex-shrink:0; }
+    .ps-cbar.today { background:#7C5CFC; }
+    .ps-days2 { display:flex; gap:6px; margin-bottom:20px; }
+    .ps-day2 { width:28px; text-align:center; font-size:10px; color:#8b82b0; flex-shrink:0; }
+    .ps-day2.today { color:#a78bfa; font-weight:600; }
+    .ps-statrow { display:flex; gap:12px; }
+    .ps-statcard { flex:1; background:rgba(124,92,252,0.1); border:1px solid rgba(124,92,252,0.2); border-radius:12px; padding:12px; }
+    .ps-statlbl { font-size:10px; color:#8b82b0; margin-bottom:5px; }
+    .ps-statval { font-size:14px; font-weight:700; color:#fff; }
+    .ps-statval.green { color:#10B981; }
+
+    /* ─ Screen dots indicator ─ */
+    .phone-dots { display:flex; gap:8px; justify-content:center; }
+    .pdot { width:6px; height:6px; border-radius:50%; background:rgba(124,92,252,0.3); transition:background 0.3s, width 0.3s; }
+    .pdot.active { background:#7C5CFC; width:20px; border-radius:3px; }
 
     /*  STATS BAR  */
     .stats-bar { position:relative; z-index:1; background:var(--bg2); border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:44px 48px; }
@@ -378,64 +388,81 @@
         <div class="phone-scene">
           <div class="phone-frame" role="img" aria-label="Soulio app showing mood tracking and AI chat">
             <div class="phone-notch" aria-hidden="true"></div>
-            <div class="phone-status" aria-hidden="true"><span>9:41</span><span> </span></div>
+            <div class="phone-status" aria-hidden="true"><span>9:41</span><span>&#x25CF;&#x25CF;&#x25CF; &#x2590;</span></div>
 
-            <!-- Screen 1  Home -->
+            <!-- Screen 1 &#x2014; Home -->
             <div class="pscreen on" id="ps1" aria-hidden="true">
-              <div class="ps-greet">Good morning, Ayoub </div>
-              <div class="ps-date">Friday, 20 Feb  How are you feeling?</div>
+              <div class="ps-greet">Good morning, Ayoub &#x2728;</div>
+              <div class="ps-date">Friday, 20 Feb &middot; How are you feeling?</div>
               <div class="ps-label">Select your mood</div>
               <div class="ps-moods">
-                <div class="ps-em"></div>
-                <div class="ps-em"></div>
-                <div class="ps-em sel"></div>
-                <div class="ps-em"></div>
-                <div class="ps-em"></div>
+                <div class="ps-em">&#x1F614;</div>
+                <div class="ps-em">&#x1F615;</div>
+                <div class="ps-em sel">&#x1F610;</div>
+                <div class="ps-em">&#x1F642;</div>
+                <div class="ps-em">&#x1F929;</div>
               </div>
               <div class="ps-streak">
-                <span class="ps-streak-ico"></span>
+                <span style="font-size:20px">&#x1F525;</span>
                 <span class="ps-streak-txt">14-day streak!</span>
               </div>
-              <button class="ps-btn">Check in now </button>
+              <button class="ps-btn">Check in now</button>
             </div>
 
-            <!-- Screen 2  AI Chat -->
+            <!-- Screen 2 &#x2014; AI Chat -->
             <div class="pscreen" id="ps2" aria-hidden="true">
               <div class="ps-chat-hd">
-                <div class="ps-chat-ava"></div>
+                <div class="ps-chat-ava">S</div>
                 <span class="ps-chat-nm">Soulio</span>
               </div>
               <div class="chat-msgs">
-                <div class="cb cb-ai">I noticed you feel better after exercise  your mood jumps +2.3 pts on gym days </div>
-                <div class="cb cb-user">Really? That's interesting </div>
+                <div class="cb cb-ai">I noticed you feel better after exercise &#x2014; your mood jumps +2.3 pts on gym days &#x1F4AA;</div>
+                <div class="cb cb-user">Really? That&#x27;s interesting &#x1F62E;</div>
                 <div class="cb cb-ai">Want to set a weekly movement goal to boost your baseline mood?</div>
+                <div class="typing-dots"><div class="tdot"></div><div class="tdot"></div><div class="tdot"></div></div>
               </div>
             </div>
 
-            <!-- Screen 3  Analytics -->
+            <!-- Screen 3 &#x2014; Analytics -->
             <div class="pscreen" id="ps3" aria-hidden="true">
-              <div class="ps-atitle">Your mood this week</div>
-              <div class="ps-bars">
-                <div class="ps-bar" style="height:40%"></div>
-                <div class="ps-bar" style="height:55%"></div>
-                <div class="ps-bar" style="height:68%"></div>
-                <div class="ps-bar" style="height:45%"></div>
-                <div class="ps-bar pk" style="height:92%"></div>
-                <div class="ps-bar" style="height:62%"></div>
-                <div class="ps-bar pk" style="height:100%"></div>
+              <div class="ps-atitle">Your week</div>
+              <div class="ps-subtitle">Feb 14 &ndash; Feb 20</div>
+              <div class="ps-chart">
+                <div class="ps-cbar" style="height:40%"></div>
+                <div class="ps-cbar" style="height:55%"></div>
+                <div class="ps-cbar" style="height:35%"></div>
+                <div class="ps-cbar" style="height:70%"></div>
+                <div class="ps-cbar" style="height:85%"></div>
+                <div class="ps-cbar" style="height:65%"></div>
+                <div class="ps-cbar today" style="height:90%"></div>
               </div>
-              <div class="ps-days">
-                <div class="ps-day">Mo</div><div class="ps-day">Tu</div><div class="ps-day">We</div>
-                <div class="ps-day">Th</div><div class="ps-day">Fr</div><div class="ps-day">Sa</div><div class="ps-day">Su</div>
+              <div class="ps-days2">
+                <div class="ps-day2">Mo</div>
+                <div class="ps-day2">Tu</div>
+                <div class="ps-day2">We</div>
+                <div class="ps-day2">Th</div>
+                <div class="ps-day2">Fr</div>
+                <div class="ps-day2">Sa</div>
+                <div class="ps-day2 today">Su</div>
               </div>
-              <div class="ps-rows">
-                <div class="ps-row"><span class="ps-rk">Top trigger</span><span class="ps-rv"> Sport</span></div>
-                <div class="ps-row"><span class="ps-rk">Weekly avg</span><span class="ps-rv">7.4 / 10</span></div>
-                <div class="ps-row"><span class="ps-rk">Best day</span><span class="ps-rv">Sunday </span></div>
+              <div class="ps-statrow">
+                <div class="ps-statcard">
+                  <div class="ps-statlbl">&#x1F4AA; Top trigger</div>
+                  <div class="ps-statval">Sport</div>
+                </div>
+                <div class="ps-statcard">
+                  <div class="ps-statlbl">&#x1F4C8; Weekly avg</div>
+                  <div class="ps-statval green">7.4 / 10</div>
+                </div>
               </div>
             </div>
           </div>
           <div class="phone-halo" aria-hidden="true"></div>
+        </div>
+        <div class="phone-dots" aria-hidden="true">
+          <div class="pdot active" id="pd0"></div>
+          <div class="pdot" id="pd1"></div>
+          <div class="pdot" id="pd2"></div>
         </div>
       </div>
     </div>
@@ -638,12 +665,15 @@
 
     /* ── PHONE SCREEN CYCLING ── */
     var screens = document.querySelectorAll('.pscreen');
+    var pdots = document.querySelectorAll('.pdot');
     var curS = 0;
     setInterval(function() {
       screens[curS].classList.remove('on');
+      if (pdots[curS]) pdots[curS].classList.remove('active');
       curS = (curS + 1) % screens.length;
       screens[curS].classList.add('on');
-    }, 3000);
+      if (pdots[curS]) pdots[curS].classList.add('active');
+    }, 3500);
 
     /* ── SCROLL REVEAL ── */
     var ro = new IntersectionObserver(function(entries) {
