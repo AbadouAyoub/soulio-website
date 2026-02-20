@@ -1,483 +1,532 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Soulio — Know Your Soul</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
+    <meta name="description" content="Track your moods, talk to an empathetic AI coach, and unlock deep insights about your emotional patterns  every single day." />
+    <title>Soulio  Know Your Soul</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet" />
     <style>
-      *,
-      *::before,
-      *::after {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
       :root {
-        --bg: #0d0d0d;
-        --card: #1c1c1e;
-        --border: #2c2c2e;
-        --accent: #7c5cfc;
-        --accent-soft: rgba(124, 92, 252, 0.12);
-        --text: #ffffff;
-        --muted: #6b7280;
+        --bg: #09090b; --bg2: #111113; --card: #18181b; --card2: #1f1f23;
+        --border: #27272a; --border2: #3f3f46; --accent: #7c5cfc; --accent2: #9b7dff;
+        --accent-soft: rgba(124,92,252,0.12); --accent-glow: rgba(124,92,252,0.35);
+        --pink: #f472b6; --cyan: #22d3ee; --green: #4ade80;
+        --text: #fafafa; --text2: #a1a1aa; --text3: #71717a; --radius: 20px;
       }
-      html {
-        scroll-behavior: smooth;
-      }
-      body {
-        background: var(--bg);
-        color: var(--text);
-        font-family: "Plus Jakarta Sans", sans-serif;
-        line-height: 1.6;
-        min-height: 100vh;
-      }
+      html { scroll-behavior: smooth; }
+      body { background: var(--bg); color: var(--text); font-family: "Plus Jakarta Sans", sans-serif; line-height: 1.6; min-height: 100vh; overflow-x: hidden; }
+      ::-webkit-scrollbar { width: 6px; }
+      ::-webkit-scrollbar-track { background: var(--bg); }
+      ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
 
-      /* ── NAV ── */
-      nav {
-        position: sticky;
-        top: 0;
-        z-index: 100;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0 40px;
-        height: 64px;
-        background: rgba(13, 13, 13, 0.85);
-        backdrop-filter: blur(12px);
-        border-bottom: 1px solid var(--border);
-      }
-      .logo {
-        font-size: 20px;
-        font-weight: 800;
-        letter-spacing: -0.5px;
-        color: var(--text);
-        text-decoration: none;
-      }
-      .logo span {
-        color: var(--accent);
-      }
-      .nav-links {
-        display: flex;
-        gap: 32px;
-        list-style: none;
-      }
-      .nav-links a {
-        color: var(--muted);
-        text-decoration: none;
-        font-size: 14px;
-        font-weight: 500;
-        transition: color 0.2s;
-      }
-      .nav-links a:hover {
-        color: var(--text);
-      }
-      .nav-cta {
-        background: var(--accent);
-        color: #fff;
-        padding: 9px 22px;
-        border-radius: 999px;
-        font-size: 14px;
-        font-weight: 700;
-        text-decoration: none;
-        transition: opacity 0.2s;
-      }
-      .nav-cta:hover {
-        opacity: 0.85;
-      }
+      /* NAV */
+      nav { position: sticky; top: 0; z-index: 999; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 68px; background: rgba(9,9,11,0.85); backdrop-filter: blur(20px) saturate(160%); border-bottom: 1px solid var(--border); }
+      .logo { font-size: 21px; font-weight: 800; letter-spacing: -0.6px; color: var(--text); text-decoration: none; display: flex; align-items: center; gap: 8px; }
+      .logo-dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 12px var(--accent); flex-shrink: 0; }
+      .nav-links { display: flex; gap: 36px; list-style: none; }
+      .nav-links a { color: var(--text2); text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.2s; }
+      .nav-links a:hover { color: var(--text); }
+      .nav-cta { background: var(--accent); color: #fff; padding: 9px 22px; border-radius: 999px; font-size: 14px; font-weight: 700; text-decoration: none; transition: box-shadow 0.2s, transform 0.2s; }
+      .nav-cta:hover { box-shadow: 0 0 24px var(--accent-glow); transform: translateY(-1px); }
 
-      /* ── HERO ── */
-      .hero {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        padding: 100px 24px 80px;
-        max-width: 760px;
-        margin: 0 auto;
-      }
-      .badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        background: var(--accent-soft);
-        border: 1px solid rgba(124, 92, 252, 0.3);
-        color: var(--accent);
-        font-size: 12px;
-        font-weight: 700;
-        padding: 6px 14px;
-        border-radius: 999px;
-        margin-bottom: 28px;
-        text-transform: uppercase;
-        letter-spacing: 0.8px;
-      }
-      h1 {
-        font-size: clamp(40px, 6vw, 72px);
-        font-weight: 800;
-        line-height: 1.08;
-        letter-spacing: -1.5px;
-        margin-bottom: 24px;
-      }
-      h1 .accent {
-        color: var(--accent);
-      }
-      .hero-sub {
-        font-size: 18px;
-        color: var(--muted);
-        max-width: 520px;
-        margin-bottom: 40px;
-        line-height: 1.7;
-      }
-      .cta-group {
-        display: flex;
-        gap: 14px;
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-      .btn-primary {
-        background: var(--accent);
-        color: #fff;
-        padding: 16px 36px;
-        border-radius: 16px;
-        font-size: 16px;
-        font-weight: 800;
-        text-decoration: none;
-        box-shadow: 0 8px 32px rgba(124, 92, 252, 0.35);
-        transition:
-          transform 0.2s,
-          opacity 0.2s;
-      }
-      .btn-primary:hover {
-        transform: translateY(-2px);
-        opacity: 0.92;
-      }
-      .btn-secondary {
-        background: var(--card);
-        color: var(--text);
-        padding: 16px 36px;
-        border-radius: 16px;
-        font-size: 16px;
-        font-weight: 700;
-        text-decoration: none;
-        border: 1px solid var(--border);
-        transition: border-color 0.2s;
-      }
-      .btn-secondary:hover {
-        border-color: var(--accent);
-      }
+      /* BG */
+      .bg-grid { position: fixed; inset: 0; z-index: 0; pointer-events: none; background: radial-gradient(ellipse 70% 60% at 50% -10%, rgba(124,92,252,0.18) 0%, transparent 60%), radial-gradient(ellipse 40% 40% at 90% 80%, rgba(244,114,182,0.06) 0%, transparent 60%); }
 
-      /* ── FEATURES ── */
-      .section {
-        padding: 80px 24px;
-        max-width: 1100px;
-        margin: 0 auto;
-      }
-      .section-label {
-        font-size: 12px;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 1.2px;
-        color: var(--accent);
-        margin-bottom: 12px;
-        text-align: center;
-      }
-      .section-title {
-        font-size: clamp(28px, 3.5vw, 44px);
-        font-weight: 800;
-        text-align: center;
-        letter-spacing: -0.5px;
-        margin-bottom: 60px;
-      }
-      .features {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 20px;
-      }
-      .feature-card {
-        background: var(--card);
-        border: 1px solid var(--border);
-        border-radius: 20px;
-        padding: 28px;
-        transition:
-          border-color 0.2s,
-          transform 0.2s;
-      }
-      .feature-card:hover {
-        border-color: rgba(124, 92, 252, 0.4);
-        transform: translateY(-3px);
-      }
-      .feature-icon {
-        font-size: 28px;
-        margin-bottom: 16px;
-      }
-      .feature-card h3 {
-        font-size: 16px;
-        font-weight: 700;
-        margin-bottom: 8px;
-      }
-      .feature-card p {
-        font-size: 14px;
-        color: var(--muted);
-        line-height: 1.65;
-      }
+      /* HERO */
+      .hero-wrapper { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 60px; max-width: 1180px; margin: 0 auto; padding: 100px 48px 80px; }
+      .hero-left { display: flex; flex-direction: column; align-items: flex-start; }
+      .badge { display: inline-flex; align-items: center; gap: 7px; background: var(--accent-soft); border: 1px solid rgba(124,92,252,0.35); color: var(--accent2); font-size: 12px; font-weight: 700; padding: 6px 14px; border-radius: 999px; margin-bottom: 28px; text-transform: uppercase; letter-spacing: 0.8px; }
+      .badge-dot { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; animation: pulse 2s infinite; }
+      @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.4; } }
+      h1 { font-size: clamp(42px,5vw,68px); font-weight: 800; line-height: 1.07; letter-spacing: -2px; margin-bottom: 22px; }
+      h1 .grad { background: linear-gradient(135deg, var(--accent2) 0%, var(--pink) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+      .hero-sub { font-size: 17px; color: var(--text2); max-width: 480px; margin-bottom: 40px; line-height: 1.75; }
+      .cta-group { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 52px; }
+      .btn-primary { display: inline-flex; align-items: center; gap: 8px; background: var(--accent); color: #fff; padding: 15px 32px; border-radius: 14px; font-size: 15px; font-weight: 800; text-decoration: none; box-shadow: 0 8px 32px var(--accent-glow); transition: transform 0.2s, box-shadow 0.2s; }
+      .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 40px var(--accent-glow); }
+      .btn-ghost { display: inline-flex; align-items: center; gap: 8px; background: var(--card); color: var(--text); padding: 15px 32px; border-radius: 14px; font-size: 15px; font-weight: 700; text-decoration: none; border: 1px solid var(--border2); transition: border-color 0.2s, background 0.2s; }
+      .btn-ghost:hover { border-color: var(--accent); background: var(--card2); }
+      .hero-stats { display: flex; gap: 36px; flex-wrap: wrap; }
+      .stat { display: flex; flex-direction: column; gap: 2px; }
+      .stat-value { font-size: 26px; font-weight: 800; letter-spacing: -0.5px; }
+      .stat-label { font-size: 12px; color: var(--text3); font-weight: 500; text-transform: uppercase; letter-spacing: 0.6px; }
 
-      /* ── PRICING ── */
-      .pricing {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 20px;
-      }
-      .price-card {
-        background: var(--card);
-        border: 1px solid var(--border);
-        border-radius: 24px;
-        padding: 36px;
-      }
-      .price-card.featured {
-        border-color: var(--accent);
-        background: linear-gradient(
-          145deg,
-          rgba(124, 92, 252, 0.08) 0%,
-          var(--card) 100%
-        );
-      }
-      .price-label {
-        font-size: 12px;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        color: var(--muted);
-        margin-bottom: 12px;
-      }
-      .price-value {
-        font-size: 48px;
-        font-weight: 800;
-        letter-spacing: -1px;
-        margin-bottom: 4px;
-      }
-      .price-period {
-        font-size: 14px;
-        color: var(--muted);
-        margin-bottom: 28px;
-      }
-      .price-badge {
-        display: inline-block;
-        background: var(--accent);
-        color: #fff;
-        font-size: 11px;
-        font-weight: 800;
-        padding: 4px 10px;
-        border-radius: 999px;
-        margin-left: 8px;
-        vertical-align: middle;
-      }
-      .price-features {
-        list-style: none;
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-        margin-bottom: 32px;
-      }
-      .price-features li {
-        font-size: 14px;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-      }
-      .check {
-        color: var(--accent);
-        font-weight: 700;
-      }
-      .cross {
-        color: var(--muted);
-      }
+      /* PHONE */
+      .hero-right { display: flex; justify-content: center; align-items: center; }
+      .phone-wrapper { position: relative; width: 280px; filter: drop-shadow(0 40px 80px rgba(124,92,252,0.28)); }
+      .phone { width: 280px; height: 580px; background: linear-gradient(160deg, #1e1b2e 0%, #120f1e 100%); border-radius: 44px; border: 2px solid rgba(124,92,252,0.4); position: relative; overflow: hidden; box-shadow: inset 0 1px 0 rgba(255,255,255,0.08); }
+      .phone::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 100px; height: 28px; background: #0a0a0d; border-radius: 0 0 18px 18px; z-index: 10; }
+      .phone-screen { position: absolute; inset: 0; padding: 50px 20px 20px; display: flex; flex-direction: column; gap: 12px; }
+      .phone-status { display: flex; justify-content: space-between; font-size: 11px; color: rgba(255,255,255,0.45); font-weight: 600; padding: 0 4px; }
+      .phone-greeting .hi { font-size: 12px; color: rgba(255,255,255,0.4); }
+      .phone-greeting .name { font-size: 17px; font-weight: 700; color: #fff; letter-spacing: -0.3px; }
+      .mood-card { background: linear-gradient(135deg, rgba(124,92,252,0.22) 0%, rgba(124,92,252,0.06) 100%); border: 1px solid rgba(124,92,252,0.3); border-radius: 16px; padding: 14px; }
+      .mood-card-label { font-size: 9px; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,0.4); margin-bottom: 8px; }
+      .mood-emojis { display: flex; gap: 6px; margin-bottom: 8px; }
+      .mood-emoji { width: 36px; height: 36px; border-radius: 11px; display: flex; align-items: center; justify-content: center; font-size: 18px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); }
+      .mood-emoji.active { background: rgba(124,92,252,0.4); border-color: rgba(124,92,252,0.6); }
+      .mood-input { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 9px; padding: 7px 10px; font-size: 10px; color: rgba(255,255,255,0.45); }
+      .streak-row { display: flex; gap: 8px; }
+      .streak-card { flex: 1; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); border-radius: 13px; padding: 10px; text-align: center; }
+      .streak-icon { font-size: 18px; margin-bottom: 2px; }
+      .streak-val { font-size: 19px; font-weight: 800; color: #fff; line-height: 1; }
+      .streak-lbl { font-size: 8px; color: rgba(255,255,255,0.35); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
+      .chart-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); border-radius: 13px; padding: 10px; }
+      .chart-card-label { font-size: 9px; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,0.35); margin-bottom: 8px; }
+      .chart-bars { display: flex; align-items: flex-end; gap: 4px; height: 40px; }
+      .bar { flex: 1; border-radius: 3px 3px 0 0; background: rgba(124,92,252,0.25); }
+      .bar.h1{height:35%} .bar.h2{height:55%} .bar.h3{height:70%} .bar.h4{height:45%} .bar.h5{height:80%} .bar.h6{height:60%} .bar.h7{height:100%;background:var(--accent);}
+      .ai-bubble { background: linear-gradient(135deg, rgba(244,114,182,0.12) 0%, rgba(124,92,252,0.12) 100%); border: 1px solid rgba(244,114,182,0.2); border-radius: 13px; padding: 10px 12px; }
+      .ai-bubble-header { display: flex; align-items: center; gap: 6px; margin-bottom: 5px; }
+      .ai-avatar { width: 17px; height: 17px; background: linear-gradient(135deg, var(--accent), var(--pink)); border-radius: 5px; display: flex; align-items: center; justify-content: center; font-size: 9px; }
+      .ai-name { font-size: 10px; font-weight: 700; color: var(--accent2); }
+      .ai-bubble p { font-size: 9.5px; color: rgba(255,255,255,0.6); line-height: 1.5; }
+      .phone-glow { position: absolute; bottom: -60px; left: 50%; transform: translateX(-50%); width: 180px; height: 180px; background: radial-gradient(circle, var(--accent) 0%, transparent 70%); opacity: 0.12; pointer-events: none; border-radius: 50%; }
 
-      /* ── FOOTER ── */
-      footer {
-        border-top: 1px solid var(--border);
-        padding: 48px 40px;
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: space-between;
-        gap: 20px;
-        color: var(--muted);
-        font-size: 13px;
-      }
-      .footer-links {
-        display: flex;
-        gap: 24px;
-        flex-wrap: wrap;
-      }
-      .footer-links a {
-        color: var(--muted);
-        text-decoration: none;
-        transition: color 0.2s;
-      }
-      .footer-links a:hover {
-        color: var(--text);
-      }
+      /* LOGOS */
+      .logos-section { position: relative; z-index: 1; padding: 40px 48px 60px; border-top: 1px solid var(--border); }
+      .logos-label { text-align: center; font-size: 12px; color: var(--text3); text-transform: uppercase; letter-spacing: 1.2px; font-weight: 600; margin-bottom: 28px; }
+      .logos-row { display: flex; align-items: center; justify-content: center; gap: 48px; flex-wrap: wrap; opacity: 0.45; }
+      .store-badge { display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 700; color: var(--text2); }
+      .store-icon { font-size: 20px; }
 
-      @media (max-width: 600px) {
-        nav {
-          padding: 0 20px;
-        }
-        .nav-links {
-          display: none;
-        }
-        footer {
-          padding: 32px 20px;
-        }
+      /* SECTIONS */
+      .section { position: relative; z-index: 1; padding: 100px 48px; max-width: 1180px; margin: 0 auto; }
+      .section-eyebrow { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.4px; color: var(--accent); margin-bottom: 14px; text-align: center; }
+      .section-title { font-size: clamp(30px,3.5vw,48px); font-weight: 800; text-align: center; letter-spacing: -1px; margin-bottom: 16px; line-height: 1.1; }
+      .section-sub { font-size: 16px; color: var(--text2); text-align: center; max-width: 520px; margin: 0 auto 64px; line-height: 1.75; }
+
+      /* BENTO */
+      .bento { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+      .bento-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px; transition: border-color 0.2s, transform 0.25s, box-shadow 0.25s; position: relative; overflow: hidden; }
+      .bento-card::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% -20%, rgba(124,92,252,0.05) 0%, transparent 70%); pointer-events: none; }
+      .bento-card:hover { border-color: rgba(124,92,252,0.4); transform: translateY(-3px); box-shadow: 0 16px 40px rgba(0,0,0,0.3); }
+      .bento-card.wide { grid-column: span 2; }
+      .bento-icon { font-size: 32px; margin-bottom: 16px; display: block; }
+      .bento-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+      .bento-card p { font-size: 14px; color: var(--text2); line-height: 1.65; }
+      .bento-visual { margin-top: 18px; }
+      .mini-chart { display: flex; align-items: flex-end; gap: 4px; height: 52px; }
+      .mini-bar { flex: 1; border-radius: 4px 4px 0 0; background: var(--accent-soft); }
+      .mini-bar.lit { background: var(--accent); }
+      .tag-cloud { display: flex; flex-wrap: wrap; gap: 6px; }
+      .tag { font-size: 11px; font-weight: 600; padding: 5px 12px; border-radius: 999px; }
+      .tag.purple { background: rgba(124,92,252,0.15); color: var(--accent2); border: 1px solid rgba(124,92,252,0.22); }
+      .tag.pink { background: rgba(244,114,182,0.1); color: #f9a8d4; border: 1px solid rgba(244,114,182,0.18); }
+      .tag.cyan { background: rgba(34,211,238,0.08); color: #67e8f9; border: 1px solid rgba(34,211,238,0.18); }
+      .streak-badge { display: inline-flex; align-items: center; gap: 10px; background: rgba(251,146,60,0.1); border: 1px solid rgba(251,146,60,0.22); border-radius: 14px; padding: 14px 18px; margin-top: 18px; }
+      .streak-badge-val { font-size: 26px; font-weight: 800; color: #fb923c; }
+      .streak-badge-lbl { font-size: 13px; color: var(--text2); line-height: 1.4; }
+
+      /* TESTIMONIALS */
+      .testimonials-bg { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+      .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+      .testi-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px; transition: border-color 0.2s, transform 0.2s; }
+      .testi-card:hover { border-color: rgba(124,92,252,0.35); transform: translateY(-2px); }
+      .testi-stars { display: flex; gap: 3px; margin-bottom: 16px; }
+      .star { color: #fbbf24; font-size: 15px; }
+      .testi-text { font-size: 15px; color: var(--text); line-height: 1.7; margin-bottom: 20px; font-style: italic; }
+      .testi-text::before { content: '\201C'; }
+      .testi-text::after { content: '\201D'; }
+      .testi-author { display: flex; align-items: center; gap: 12px; }
+      .testi-avatar { width: 42px; height: 42px; border-radius: 999px; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 800; flex-shrink: 0; color: #fff; }
+      .av1{background:linear-gradient(135deg,#7c5cfc,#f472b6)} .av2{background:linear-gradient(135deg,#22d3ee,#7c5cfc)} .av3{background:linear-gradient(135deg,#4ade80,#22d3ee)} .av4{background:linear-gradient(135deg,#fb923c,#f472b6)} .av5{background:linear-gradient(135deg,#f472b6,#fb923c)} .av6{background:linear-gradient(135deg,#7c5cfc,#22d3ee)}
+      .testi-name { font-size: 14px; font-weight: 700; }
+      .testi-role { font-size: 12px; color: var(--text3); }
+
+      /* PRICING */
+      .pricing-toggle { display: flex; align-items: center; justify-content: center; gap: 14px; margin-bottom: 48px; }
+      .toggle-label { font-size: 14px; font-weight: 600; color: var(--text2); }
+      .save-pill { background: rgba(74,222,128,0.12); color: #4ade80; border: 1px solid rgba(74,222,128,0.22); font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 999px; }
+      .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; align-items: start; }
+      .price-card { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 36px 32px; position: relative; overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; }
+      .price-card:hover { transform: translateY(-4px); box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
+      .price-card.featured { border-color: var(--accent); background: linear-gradient(160deg, rgba(124,92,252,0.1) 0%, var(--card) 60%); box-shadow: 0 0 0 1px rgba(124,92,252,0.25), 0 20px 60px rgba(124,92,252,0.12); }
+      .price-card.featured::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--accent), var(--pink)); }
+      .popular-badge { position: absolute; top: -1px; right: 28px; background: linear-gradient(135deg, var(--accent), var(--pink)); color: #fff; font-size: 11px; font-weight: 800; padding: 6px 16px; border-radius: 0 0 12px 12px; letter-spacing: 0.5px; }
+      .price-tier { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; color: var(--text3); margin-bottom: 12px; }
+      .price-val { font-size: 52px; font-weight: 800; letter-spacing: -2px; line-height: 1; margin-bottom: 4px; }
+      .price-val sup { font-size: 24px; font-weight: 700; vertical-align: super; letter-spacing: 0; }
+      .price-desc { font-size: 13px; color: var(--text3); margin-bottom: 28px; min-height: 36px; }
+      .price-divider { height: 1px; background: var(--border); margin-bottom: 24px; }
+      .price-features { list-style: none; display: flex; flex-direction: column; gap: 11px; margin-bottom: 32px; }
+      .price-features li { font-size: 14px; display: flex; align-items: flex-start; gap: 10px; }
+      .check { color: var(--accent); font-weight: 700; flex-shrink: 0; }
+      .cross { color: var(--border2); flex-shrink: 0; }
+      .btn-price-primary { display: block; text-align: center; width: 100%; background: var(--accent); color: #fff; padding: 14px; border-radius: 14px; font-size: 15px; font-weight: 800; text-decoration: none; box-shadow: 0 8px 24px var(--accent-glow); transition: transform 0.2s, box-shadow 0.2s; }
+      .btn-price-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 32px var(--accent-glow); }
+      .btn-price-ghost { display: block; text-align: center; width: 100%; background: transparent; color: var(--text); padding: 14px; border-radius: 14px; font-size: 15px; font-weight: 700; text-decoration: none; border: 1px solid var(--border2); transition: border-color 0.2s, background 0.2s; }
+      .btn-price-ghost:hover { border-color: var(--accent); background: var(--card2); }
+      .pricing-note { text-align: center; margin-top: 28px; font-size: 13px; color: var(--text3); }
+
+      /* CTA BANNER */
+      .cta-banner { position: relative; z-index: 1; margin: 0 48px 100px; background: linear-gradient(135deg, rgba(124,92,252,0.18) 0%, rgba(244,114,182,0.08) 100%); border: 1px solid rgba(124,92,252,0.28); border-radius: 28px; padding: 72px 48px; text-align: center; overflow: hidden; }
+      .cta-banner::before { content: ''; position: absolute; top: -60px; right: -60px; width: 240px; height: 240px; background: radial-gradient(circle, rgba(124,92,252,0.22) 0%, transparent 70%); border-radius: 50%; pointer-events: none; }
+      .cta-banner::after { content: ''; position: absolute; bottom: -60px; left: -40px; width: 200px; height: 200px; background: radial-gradient(circle, rgba(244,114,182,0.12) 0%, transparent 70%); border-radius: 50%; pointer-events: none; }
+      .cta-banner h2 { font-size: clamp(28px,3vw,46px); font-weight: 800; letter-spacing: -1px; margin-bottom: 14px; position: relative; z-index: 1; }
+      .cta-banner p { font-size: 16px; color: var(--text2); max-width: 440px; margin: 0 auto 36px; line-height: 1.7; position: relative; z-index: 1; }
+      .cta-group-center { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; position: relative; z-index: 1; }
+
+      /* FOOTER */
+      footer { position: relative; z-index: 1; border-top: 1px solid var(--border); padding: 48px; display: grid; grid-template-columns: 1fr auto; align-items: start; gap: 24px; }
+      .footer-brand p { font-size: 13px; color: var(--text3); max-width: 260px; line-height: 1.6; margin-top: 8px; }
+      .footer-links { display: flex; gap: 24px; flex-wrap: wrap; margin-top: 6px; }
+      .footer-links a { color: var(--text3); text-decoration: none; font-size: 13px; transition: color 0.2s; }
+      .footer-links a:hover { color: var(--text); }
+      .footer-copy { grid-column: 1 / -1; font-size: 12px; color: var(--text3); padding-top: 24px; border-top: 1px solid var(--border); }
+
+      /* RESPONSIVE */
+      @media (max-width: 1024px) {
+        .bento { grid-template-columns: repeat(2,1fr); }
+        .bento-card.wide { grid-column: span 2; }
+        .pricing-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
+        .testimonials-grid { grid-template-columns: repeat(2,1fr); }
+      }
+      @media (max-width: 768px) {
+        nav { padding: 0 20px; }
+        .nav-links { display: none; }
+        .hero-wrapper { grid-template-columns: 1fr; padding: 64px 24px 48px; text-align: center; gap: 52px; }
+        .hero-left { align-items: center; }
+        .hero-sub { margin: 0 auto 40px; }
+        .section { padding: 72px 24px; }
+        .logos-section { padding: 32px 24px 48px; }
+        .logos-row { gap: 24px; }
+        .bento { grid-template-columns: 1fr; }
+        .bento-card.wide { grid-column: span 1; }
+        .testimonials-grid { grid-template-columns: 1fr; }
+        .cta-banner { margin: 0 20px 72px; padding: 52px 28px; }
+        footer { grid-template-columns: 1fr; padding: 36px 24px; text-align: center; }
+        .footer-brand p { margin: 8px auto 0; }
+        .footer-links { justify-content: center; }
       }
     </style>
   </head>
   <body>
+    <div class="bg-grid"></div>
+
     <!-- NAV -->
     <nav>
-      <a href="index.html" class="logo">SOULI<span>O</span></a>
+      <a href="index.html" class="logo">
+        <div class="logo-dot"></div>
+        Soulio
+      </a>
       <ul class="nav-links">
         <li><a href="#features">Features</a></li>
+        <li><a href="#testimonials">Reviews</a></li>
         <li><a href="#pricing">Pricing</a></li>
         <li><a href="support.html">Support</a></li>
       </ul>
-      <a href="#pricing" class="nav-cta">Get Started</a>
+      <a href="#pricing" class="nav-cta">Get Started </a>
     </nav>
 
     <!-- HERO -->
-    <section class="hero">
-      <div class="badge">✨ AI-Powered Mental Wellness</div>
-      <h1>Know Your<br /><span class="accent">Soul.</span></h1>
-      <p class="hero-sub">
-        Track your moods, talk to an empathetic AI coach, and unlock deep
-        insights about your emotional patterns — every single day.
-      </p>
-      <div class="cta-group">
-        <a href="#pricing" class="btn-primary">Download Free →</a>
-        <a href="#features" class="btn-secondary">See Features</a>
+    <div class="hero-wrapper">
+      <div class="hero-left">
+        <div class="badge">
+          <span class="badge-dot"></span>
+          AI-Powered Mental Wellness
+        </div>
+        <h1>Your mood,<br>your story,<br><span class="grad">your soul.</span></h1>
+        <p class="hero-sub">
+          Track how you feel every day, chat with an empathetic AI coach, and discover the hidden patterns shaping your emotional life.
+        </p>
+        <div class="cta-group">
+          <a href="#pricing" class="btn-primary">Start for Free </a>
+          <a href="#features" class="btn-ghost">See how it works</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat">
+            <span class="stat-value">10K+</span>
+            <span class="stat-label">Active Users</span>
+          </div>
+          <div class="stat">
+            <span class="stat-value">4.9</span>
+            <span class="stat-label">App Store</span>
+          </div>
+          <div class="stat">
+            <span class="stat-value">98%</span>
+            <span class="stat-label">Feel better</span>
+          </div>
+        </div>
       </div>
-    </section>
+      <div class="hero-right">
+        <div class="phone-wrapper">
+          <div class="phone">
+            <div class="phone-screen">
+              <div class="phone-status"><span>9:41</span><span> </span></div>
+              <div class="phone-greeting">
+                <div class="hi">Good morning,</div>
+                <div class="name">How are you today? </div>
+              </div>
+              <div class="mood-card">
+                <div class="mood-card-label">Daily Check-in</div>
+                <div class="mood-emojis">
+                  <div class="mood-emoji"></div>
+                  <div class="mood-emoji"></div>
+                  <div class="mood-emoji active"></div>
+                  <div class="mood-emoji"></div>
+                  <div class="mood-emoji"></div>
+                </div>
+                <div class="mood-input">Add a note "Feeling productive today"</div>
+              </div>
+              <div class="streak-row">
+                <div class="streak-card">
+                  <div class="streak-icon"></div>
+                  <div class="streak-val">14</div>
+                  <div class="streak-lbl">Day Streak</div>
+                </div>
+                <div class="streak-card">
+                  <div class="streak-icon"></div>
+                  <div class="streak-val">21</div>
+                  <div class="streak-lbl">Best Ever</div>
+                </div>
+              </div>
+              <div class="chart-card">
+                <div class="chart-card-label">7-Day Mood Trend</div>
+                <div class="chart-bars">
+                  <div class="bar h3"></div><div class="bar h2"></div><div class="bar h5"></div>
+                  <div class="bar h4"></div><div class="bar h6"></div><div class="bar h3"></div>
+                  <div class="bar h7"></div>
+                </div>
+              </div>
+              <div class="ai-bubble">
+                <div class="ai-bubble-header">
+                  <div class="ai-avatar"></div>
+                  <span class="ai-name">Soulio AI</span>
+                </div>
+                <p>You've logged 14 days in a row  incredible! Your mood has trended upward this week. </p>
+              </div>
+            </div>
+          </div>
+          <div class="phone-glow"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STORE LOGOS -->
+    <div class="logos-section">
+      <p class="logos-label">Trusted by thousands of users worldwide</p>
+      <div class="logos-row">
+        <div class="store-badge"><span class="store-icon"></span> App Store</div>
+        <div class="store-badge"><span class="store-icon"></span> Google Play</div>
+        <div class="store-badge"> 4.9 / 5 rating</div>
+        <div class="store-badge"> Encrypted data</div>
+        <div class="store-badge"> Free to start</div>
+      </div>
+    </div>
 
     <!-- FEATURES -->
     <section class="section" id="features">
-      <p class="section-label">Everything you need</p>
-      <h2 class="section-title">Your complete wellness companion</h2>
-      <div class="features">
-        <div class="feature-card">
-          <div class="feature-icon">✍️</div>
-          <h3>Daily Check-ins</h3>
-          <p>
-            Track mood, intensity, context tags and journal entries in under 60
-            seconds.
-          </p>
+      <p class="section-eyebrow">Features</p>
+      <h2 class="section-title">Everything your mind needs</h2>
+      <p class="section-sub">A thoughtful set of tools designed to make self-awareness a daily habit  not a chore.</p>
+      <div class="bento">
+        <div class="bento-card wide">
+          <span class="bento-icon"></span>
+          <h3>Daily Check-ins  done in 30 seconds</h3>
+          <p>Pick your mood, set an intensity, add context tags and a quick journal note. The fastest emotional log imaginable.</p>
+          <div class="bento-visual tag-cloud">
+            <span class="tag purple"> Happy</span>
+            <span class="tag pink"> Productive</span>
+            <span class="tag cyan"> Tired</span>
+            <span class="tag purple"> Energetic</span>
+            <span class="tag pink"> Stressed</span>
+            <span class="tag cyan"> Focused</span>
+            <span class="tag purple"> Grateful</span>
+            <span class="tag pink"> Frustrated</span>
+          </div>
         </div>
-        <div class="feature-card">
-          <div class="feature-icon">💜</div>
-          <h3>AI Coach — Soulio</h3>
-          <p>
-            Powered by GPT-4o. Your AI coach reads your mood history and gives
-            warm, personalised guidance.
-          </p>
+        <div class="bento-card">
+          <span class="bento-icon"></span>
+          <h3>Mood Insights & Trends</h3>
+          <p>Visualise 7 or 30-day patterns. Spot exactly what triggers your best  and worst  days.</p>
+          <div class="bento-visual mini-chart">
+            <div class="mini-bar" style="height:40%"></div>
+            <div class="mini-bar" style="height:60%"></div>
+            <div class="mini-bar" style="height:55%"></div>
+            <div class="mini-bar" style="height:80%"></div>
+            <div class="mini-bar" style="height:45%"></div>
+            <div class="mini-bar lit" style="height:100%"></div>
+            <div class="mini-bar lit" style="height:90%"></div>
+          </div>
         </div>
-        <div class="feature-card">
-          <div class="feature-icon">📊</div>
-          <h3>Mood Insights</h3>
-          <p>
-            See 7 or 30-day trends, tag breakdowns, streaks and your emotional
-            patterns at a glance.
-          </p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">🔥</div>
+        <div class="bento-card">
+          <span class="bento-icon"></span>
           <h3>Streak Tracking</h3>
-          <p>
-            Build consistency with daily streaks. Current streak and best streak
-            always visible on home.
-          </p>
+          <p>Build consistency with daily streaks. Your current and best streak always front and centre on your home screen.</p>
+          <div class="streak-badge">
+            <span class="streak-badge-val"> 14</span>
+            <div class="streak-badge-lbl">day streak<br><span style="font-size:11px;opacity:0.6">Best ever: 21 days</span></div>
+          </div>
         </div>
-        <div class="feature-card">
-          <div class="feature-icon">🔔</div>
+        <div class="bento-card">
+          <span class="bento-icon"></span>
+          <h3>AI Coach  Soulio</h3>
+          <p>Powered by GPT-4o. Your AI coach reads your full mood history and gives warm, personalised guidance whenever you need it.</p>
+        </div>
+        <div class="bento-card">
+          <span class="bento-icon"></span>
           <h3>Smart Reminders</h3>
-          <p>
-            Set a daily check-in reminder at your preferred time. Never miss a
-            day.
-          </p>
+          <p>Set a daily check-in reminder at your perfect time. Never miss a day of self-reflection again.</p>
         </div>
-        <div class="feature-card">
-          <div class="feature-icon">🔒</div>
+        <div class="bento-card">
+          <span class="bento-icon"></span>
           <h3>Private & Secure</h3>
-          <p>
-            All data encrypted at rest via Supabase. Your journal stays yours,
-            always.
-          </p>
+          <p>All data encrypted at rest via Supabase. Your journal stays completely yours  we never sell your data.</p>
         </div>
       </div>
     </section>
+
+    <!-- TESTIMONIALS -->
+    <div class="testimonials-bg" id="testimonials">
+      <section class="section" style="padding-top:100px;padding-bottom:100px">
+        <p class="section-eyebrow">Testimonials</p>
+        <h2 class="section-title">Loved by thousands</h2>
+        <p class="section-sub">Real people who made emotional self-awareness a daily habit with Soulio.</p>
+        <div class="testimonials-grid">
+          <div class="testi-card">
+            <div class="testi-stars"><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span></div>
+            <p class="testi-text">Soulio changed how I understand myself. After two weeks I noticed clear patterns in my anxiety  I now know exactly what triggers it. The AI coach is genuinely helpful, not generic.</p>
+            <div class="testi-author">
+              <div class="testi-avatar av1">S</div>
+              <div><div class="testi-name">Sarah K.</div><div class="testi-role">Designer  New York</div></div>
+            </div>
+          </div>
+          <div class="testi-card">
+            <div class="testi-stars"><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span></div>
+            <p class="testi-text">I've tried every journaling app out there. Soulio is the first one that actually stuck. The 30-second check-in is genius  I haven't missed a single day in 3 months.</p>
+            <div class="testi-author">
+              <div class="testi-avatar av2">M</div>
+              <div><div class="testi-name">Marcus T.</div><div class="testi-role">Engineer  Berlin</div></div>
+            </div>
+          </div>
+          <div class="testi-card">
+            <div class="testi-stars"><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span></div>
+            <p class="testi-text">The AI feels like talking to a friend who actually remembers everything. It references my past check-ins and that context makes all the difference in the world.</p>
+            <div class="testi-author">
+              <div class="testi-avatar av3">A</div>
+              <div><div class="testi-name">Aisha R.</div><div class="testi-role">Therapist  London</div></div>
+            </div>
+          </div>
+          <div class="testi-card">
+            <div class="testi-stars"><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span></div>
+            <p class="testi-text">Premium is absolutely worth it. The 30-day trend view showed me I'm consistently low on Sundays  I would never have spotted that alone. Total game changer.</p>
+            <div class="testi-author">
+              <div class="testi-avatar av4">J</div>
+              <div><div class="testi-name">James L.</div><div class="testi-role">Entrepreneur  Toronto</div></div>
+            </div>
+          </div>
+          <div class="testi-card">
+            <div class="testi-stars"><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span></div>
+            <p class="testi-text">The streak feature keeps me accountable in the best way. 47 days and counting! The app is beautiful and the dark UI is so easy on the eyes late at night.</p>
+            <div class="testi-author">
+              <div class="testi-avatar av5">P</div>
+              <div><div class="testi-name">Priya M.</div><div class="testi-role">Student  Mumbai</div></div>
+            </div>
+          </div>
+          <div class="testi-card">
+            <div class="testi-stars"><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span></div>
+            <p class="testi-text">As someone skeptical of AI wellness apps, Soulio won me over. It's not trying to replace a therapist  it's helping me prepare better for my sessions. I love it.</p>
+            <div class="testi-author">
+              <div class="testi-avatar av6">D</div>
+              <div><div class="testi-name">Daniel W.</div><div class="testi-role">Teacher  Sydney</div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
 
     <!-- PRICING -->
     <section class="section" id="pricing">
-      <p class="section-label">Simple pricing</p>
-      <h2 class="section-title">Start free, go deeper with Premium</h2>
-      <div class="pricing">
+      <p class="section-eyebrow">Pricing</p>
+      <h2 class="section-title">Start free. Upgrade anytime.</h2>
+      <p class="section-sub">No hidden fees. Cancel anytime. Your first 7 days of Premium are always free.</p>
+      <div class="pricing-toggle">
+        <span class="toggle-label">Monthly</span>
+        <span style="color:var(--border2);font-size:18px"></span>
+        <span class="toggle-label">Annual &nbsp;<span class="save-pill">Save 58%</span></span>
+      </div>
+      <div class="pricing-grid">
         <div class="price-card">
-          <p class="price-label">Free</p>
+          <p class="price-tier">Free</p>
           <div class="price-value">$0</div>
-          <p class="price-period">Forever free</p>
+          <p class="price-desc">Forever free. No credit card needed.</p>
+          <div class="price-divider"></div>
           <ul class="price-features">
-            <li><span class="check">✓</span> Unlimited check-ins</li>
-            <li><span class="check">✓</span> 7-day mood chart</li>
-            <li><span class="check">✓</span> Streak tracking</li>
-            <li><span class="check">✓</span> 5 AI messages / session</li>
-            <li><span class="cross">—</span> 30-day insights</li>
-            <li><span class="cross">—</span> Unlimited AI chat</li>
+            <li><span class="check"></span> Unlimited daily check-ins</li>
+            <li><span class="check"></span> 7-day mood chart</li>
+            <li><span class="check"></span> Streak tracking</li>
+            <li><span class="check"></span> 5 AI messages per session</li>
+            <li><span class="check"></span> Daily reminders</li>
+            <li><span class="cross"></span> 30-day trend insights</li>
+            <li><span class="cross"></span> Unlimited AI chat</li>
+            <li><span class="cross"></span> PDF / CSV export</li>
           </ul>
-          <a
-            href="#"
-            class="btn-secondary"
-            style="display: block; text-align: center"
-            >Download App</a
-          >
+          <a href="#" class="btn-price-ghost">Download Free</a>
         </div>
         <div class="price-card featured">
-          <p class="price-label">
-            Premium <span class="price-badge">Save 58%</span>
-          </p>
-          <div class="price-value">$49.99</div>
-          <p class="price-period">
-            / year &nbsp;·&nbsp; $4.17 / mo &nbsp;·&nbsp; 7-day free trial
-          </p>
+          <div class="popular-badge"> Most Popular</div>
+          <p class="price-tier">Premium Annual</p>
+          <div class="price-value"><sup>$</sup>49.99</div>
+          <p class="price-desc">Per year &nbsp;&nbsp; <strong style="color:var(--text)">$4.17 / mo</strong> &nbsp;&nbsp; 7-day free trial</p>
+          <div class="price-divider"></div>
           <ul class="price-features">
-            <li><span class="check">✓</span> Everything in Free</li>
-            <li>
-              <span class="check">✓</span> <strong>Unlimited AI chat</strong>
-            </li>
-            <li>
-              <span class="check">✓</span> <strong>30-day insights</strong>
-            </li>
-            <li><span class="check">✓</span> Priority responses</li>
-            <li><span class="check">✓</span> PDF / CSV export</li>
-            <li><span class="check">✓</span> Early access to new features</li>
+            <li><span class="check"></span> Everything in Free</li>
+            <li><span class="check"></span> <strong>Unlimited AI chat</strong></li>
+            <li><span class="check"></span> <strong>30-day trend insights</strong></li>
+            <li><span class="check"></span> Priority AI responses</li>
+            <li><span class="check"></span> PDF &amp; CSV export</li>
+            <li><span class="check"></span> Early access to new features</li>
+            <li><span class="check"></span> Ad-free experience</li>
+            <li><span class="check"></span> Premium badge in app</li>
           </ul>
-          <a
-            href="#"
-            class="btn-primary"
-            style="display: block; text-align: center"
-            >Start Free Trial →</a
-          >
+          <a href="#" class="btn-price-primary">Start 7-Day Free Trial </a>
+        </div>
+        <div class="price-card">
+          <p class="price-tier">Premium Monthly</p>
+          <div class="price-value"><sup>$</sup>9.99</div>
+          <p class="price-desc">Per month &nbsp;&nbsp; billed monthly</p>
+          <div class="price-divider"></div>
+          <ul class="price-features">
+            <li><span class="check"></span> Everything in Free</li>
+            <li><span class="check"></span> Unlimited AI chat</li>
+            <li><span class="check"></span> 30-day trend insights</li>
+            <li><span class="check"></span> Priority AI responses</li>
+            <li><span class="check"></span> PDF &amp; CSV export</li>
+            <li><span class="check"></span> Early access to new features</li>
+            <li><span class="cross"></span> Annual discount (58% off)</li>
+            <li><span class="cross"></span> Premium badge</li>
+          </ul>
+          <a href="#" class="btn-price-ghost">Start Free Trial </a>
         </div>
       </div>
+      <p class="pricing-note"> Secure payment via App Store / Google Play &nbsp;&nbsp; Cancel anytime &nbsp;&nbsp; 7-day free trial on all paid plans</p>
     </section>
+
+    <!-- CTA BANNER -->
+    <div class="cta-banner">
+      <h2>Ready to know your soul?</h2>
+      <p>Join thousands of people who've made emotional self-awareness a daily habit. Free to start, always.</p>
+      <div class="cta-group-center">
+        <a href="#pricing" class="btn-primary">Download Free →</a>
+        <a href="support.html" class="btn-ghost">Talk to support</a>
+      </div>
+    </div>
 
     <!-- FOOTER -->
     <footer>
-      <span>© 2026 Soulio. All rights reserved.</span>
+      <div class="footer-brand">
+        <a href="index.html" class="logo"><div class="logo-dot"></div>Soulio</a>
+        <p>Know your soul. Track your mood, chat with your AI coach, and understand your emotional patterns — every day.</p>
+      </div>
       <div class="footer-links">
         <a href="privacy.html">Privacy Policy</a>
         <a href="terms.html">Terms of Service</a>
         <a href="support.html">Support</a>
       </div>
+      <p class="footer-copy">© 2026 Soulio. All rights reserved. Made with 💜 for your wellbeing.</p>
     </footer>
   </body>
 </html>
