@@ -1,0 +1,452 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Support — Soulio</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      :root {
+        --bg: #0d0d0d;
+        --card: #1c1c1e;
+        --border: #2c2c2e;
+        --accent: #7c5cfc;
+        --accent-soft: rgba(124, 92, 252, 0.1);
+        --text: #ffffff;
+        --muted: #6b7280;
+      }
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: "Plus Jakarta Sans", sans-serif;
+        line-height: 1.7;
+      }
+      nav {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 40px;
+        height: 64px;
+        background: rgba(13, 13, 13, 0.9);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border);
+      }
+      .logo {
+        font-size: 20px;
+        font-weight: 800;
+        letter-spacing: -0.5px;
+        color: var(--text);
+        text-decoration: none;
+      }
+      .logo span {
+        color: var(--accent);
+      }
+      .back {
+        color: var(--muted);
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 500;
+        transition: color 0.2s;
+      }
+      .back:hover {
+        color: var(--text);
+      }
+
+      /* HERO */
+      .hero {
+        text-align: center;
+        padding: 80px 24px 56px;
+        max-width: 640px;
+        margin: 0 auto;
+      }
+      .page-badge {
+        display: inline-block;
+        background: var(--accent-soft);
+        border: 1px solid rgba(124, 92, 252, 0.3);
+        color: var(--accent);
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        padding: 5px 14px;
+        border-radius: 999px;
+        margin-bottom: 20px;
+      }
+      h1 {
+        font-size: clamp(32px, 5vw, 52px);
+        font-weight: 800;
+        letter-spacing: -1px;
+        margin-bottom: 14px;
+      }
+      .hero-sub {
+        font-size: 16px;
+        color: var(--muted);
+      }
+
+      /* FAQ */
+      .container {
+        max-width: 760px;
+        margin: 0 auto;
+        padding: 0 24px 100px;
+      }
+      .section-label {
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1.2px;
+        color: var(--accent);
+        margin-bottom: 28px;
+      }
+      .faq {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 72px;
+      }
+      details {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        overflow: hidden;
+        transition: border-color 0.2s;
+      }
+      details[open] {
+        border-color: rgba(124, 92, 252, 0.35);
+      }
+      summary {
+        padding: 18px 22px;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        list-style: none;
+        user-select: none;
+      }
+      summary::-webkit-details-marker {
+        display: none;
+      }
+      .arrow {
+        color: var(--muted);
+        font-size: 18px;
+        transition: transform 0.25s;
+      }
+      details[open] .arrow {
+        transform: rotate(90deg);
+      }
+      .faq-body {
+        padding: 0 22px 18px;
+        font-size: 14px;
+        color: #d1d5db;
+        line-height: 1.7;
+      }
+      .faq-body a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+      .faq-body a:hover {
+        text-decoration: underline;
+      }
+
+      /* Contact card */
+      .contact-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 16px;
+      }
+      .contact-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: 28px;
+        text-align: center;
+        transition:
+          border-color 0.2s,
+          transform 0.2s;
+        text-decoration: none;
+      }
+      .contact-card:hover {
+        border-color: rgba(124, 92, 252, 0.4);
+        transform: translateY(-3px);
+      }
+      .contact-icon {
+        font-size: 30px;
+        margin-bottom: 14px;
+      }
+      .contact-card h3 {
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--text);
+        margin-bottom: 6px;
+      }
+      .contact-card p {
+        font-size: 13px;
+        color: var(--muted);
+      }
+      .contact-cta {
+        display: inline-block;
+        margin-top: 14px;
+        background: var(--accent);
+        color: #fff;
+        padding: 9px 20px;
+        border-radius: 999px;
+        font-size: 13px;
+        font-weight: 700;
+      }
+
+      /* Crisis */
+      .crisis {
+        background: rgba(239, 68, 68, 0.07);
+        border: 1px solid rgba(239, 68, 68, 0.2);
+        border-radius: 20px;
+        padding: 28px;
+        margin-top: 60px;
+        text-align: center;
+      }
+      .crisis h3 {
+        font-size: 16px;
+        font-weight: 700;
+        color: #fca5a5;
+        margin-bottom: 8px;
+      }
+      .crisis p {
+        font-size: 14px;
+        color: #fca5a5;
+      }
+      .crisis a {
+        color: #f87171;
+        font-weight: 700;
+      }
+
+      footer {
+        border-top: 1px solid var(--border);
+        padding: 32px 40px;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 12px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+      footer a {
+        color: var(--muted);
+        text-decoration: none;
+      }
+      footer a:hover {
+        color: var(--text);
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <a href="index.html" class="logo">SOULI<span>O</span></a>
+      <a href="index.html" class="back">← Back to home</a>
+    </nav>
+
+    <!-- HERO -->
+    <div class="hero">
+      <div class="page-badge">Support</div>
+      <h1>How can we help? 💜</h1>
+      <p class="hero-sub">
+        Find answers to common questions below, or reach out directly — we're
+        here for you.
+      </p>
+    </div>
+
+    <div class="container">
+      <!-- FAQ -->
+      <p class="section-label">Frequently asked questions</p>
+      <div class="faq">
+        <details>
+          <summary>
+            How do I start a daily check-in? <span class="arrow">›</span>
+          </summary>
+          <div class="faq-body">
+            Tap the <strong>"Start Check-in ✨"</strong> button on the Home
+            screen. You'll pick your mood (1–5), intensity (1–10), optional
+            context tags and a journal note. It takes under 60 seconds!
+          </div>
+        </details>
+
+        <details>
+          <summary>
+            What is the Soulio AI coach? <span class="arrow">›</span>
+          </summary>
+          <div class="faq-body">
+            Soulio AI is powered by <strong>GPT-4o-mini</strong>. It reads your
+            recent mood history and provides warm, empathetic guidance. It is
+            <em>not</em> a replacement for professional therapy — if you're in
+            crisis, please reach out to a qualified professional.
+          </div>
+        </details>
+
+        <details>
+          <summary>
+            Why am I limited to 5 AI messages? <span class="arrow">›</span>
+          </summary>
+          <div class="faq-body">
+            Free users get 5 AI messages per session. Upgrade to
+            <strong>Soulio Premium</strong> ($49.99/year or $9.99/month) for
+            unlimited conversations. Tap "Upgrade to Premium" on the Profile
+            tab.
+          </div>
+        </details>
+
+        <details>
+          <summary>
+            How do I set up a daily reminder? <span class="arrow">›</span>
+          </summary>
+          <div class="faq-body">
+            Go to the <strong>Profile tab → Daily reminder</strong>. Toggle it
+            on and choose your preferred time from the presets (8AM, 12PM, 6PM,
+            8PM, 10PM). You'll need to grant notification permissions the first
+            time.
+          </div>
+        </details>
+
+        <details>
+          <summary>
+            How do I cancel my Premium subscription?
+            <span class="arrow">›</span>
+          </summary>
+          <div class="faq-body">
+            Subscriptions are managed by Apple or Google:
+            <br /><br />
+            <strong>iOS:</strong> Settings → [your name] → Subscriptions →
+            Soulio → Cancel.<br />
+            <strong>Android:</strong> Google Play → Profile → Payments &
+            subscriptions → Subscriptions → Soulio → Cancel. <br /><br />
+            Cancel at least 24 hours before the renewal date to avoid being
+            charged.
+          </div>
+        </details>
+
+        <details>
+          <summary>
+            How do I request a refund? <span class="arrow">›</span>
+          </summary>
+          <div class="faq-body">
+            Refunds are handled by the App Store or Google Play. Visit
+            <a href="https://reportaproblem.apple.com" target="_blank"
+              >reportaproblem.apple.com</a
+            >
+            (iOS) or contact Google Play Support (Android). We're happy to help
+            — email us at
+            <a href="mailto:support@soulio.app">support@soulio.app</a>.
+          </div>
+        </details>
+
+        <details>
+          <summary>
+            How do I delete my account? <span class="arrow">›</span>
+          </summary>
+          <div class="faq-body">
+            To permanently delete your account and all associated data, email us
+            at <a href="mailto:support@soulio.app">support@soulio.app</a> with
+            the subject line "Account deletion request". We will process it
+            within 7 business days and confirm once complete.
+          </div>
+        </details>
+
+        <details>
+          <summary>
+            Is my journal data private? <span class="arrow">›</span>
+          </summary>
+          <div class="faq-body">
+            Yes. Your mood entries and journal notes are stored securely on
+            Supabase with row-level security — only you can access your data. We
+            never sell or share your personal content. Read our full
+            <a href="privacy.html">Privacy Policy</a> for details.
+          </div>
+        </details>
+
+        <details>
+          <summary>
+            The app isn't loading / I see a connection error. What do I do?
+            <span class="arrow">›</span>
+          </summary>
+          <div class="faq-body">
+            Try the following steps:
+            <ul style="margin-top: 10px">
+              <li>Force-close the app and reopen it.</li>
+              <li>Check your internet connection.</li>
+              <li>
+                If the issue persists, uninstall and reinstall the app (your
+                data is saved in the cloud).
+              </li>
+              <li>
+                Still stuck? Email
+                <a href="mailto:support@soulio.app">support@soulio.app</a> with
+                your device model and OS version.
+              </li>
+            </ul>
+          </div>
+        </details>
+      </div>
+
+      <!-- CONTACT -->
+      <p class="section-label">Get in touch</p>
+      <div class="contact-grid">
+        <a href="mailto:support@soulio.app" class="contact-card">
+          <div class="contact-icon">✉️</div>
+          <h3>Email Support</h3>
+          <p>We typically reply within 24 hours on business days.</p>
+          <span class="contact-cta">support@soulio.app</span>
+        </a>
+        <a href="privacy.html" class="contact-card">
+          <div class="contact-icon">🔒</div>
+          <h3>Privacy Policy</h3>
+          <p>Learn how we collect, use and protect your data.</p>
+          <span class="contact-cta">Read Policy →</span>
+        </a>
+        <a href="terms.html" class="contact-card">
+          <div class="contact-icon">📋</div>
+          <h3>Terms of Service</h3>
+          <p>Understand the rules and conditions of using Soulio.</p>
+          <span class="contact-cta">Read Terms →</span>
+        </a>
+      </div>
+
+      <!-- CRISIS -->
+      <div class="crisis">
+        <h3>🆘 In crisis or need immediate help?</h3>
+        <p>
+          Soulio is not a crisis service. If you are in immediate danger or
+          experiencing a mental health emergency, please contact your local
+          emergency services or a crisis line:
+          <br /><br />
+          <strong>France:</strong> <a href="tel:3114">3114</a> (Numéro national
+          de prévention du suicide) &nbsp;·&nbsp; <strong>US:</strong>
+          <a href="tel:988">988</a> (Suicide & Crisis Lifeline) &nbsp;·&nbsp;
+          <strong>International:</strong>
+          <a href="https://www.befrienders.org" target="_blank"
+            >befrienders.org</a
+          >
+        </p>
+      </div>
+    </div>
+
+    <footer>
+      <span>© 2026 Soulio</span>
+      <div style="display: flex; gap: 24px">
+        <a href="index.html">Home</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+      </div>
+    </footer>
+  </body>
+</html>

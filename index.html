@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Soulio — Know Your Soul</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      :root {
+        --bg: #0d0d0d;
+        --card: #1c1c1e;
+        --border: #2c2c2e;
+        --accent: #7c5cfc;
+        --accent-soft: rgba(124, 92, 252, 0.12);
+        --text: #ffffff;
+        --muted: #6b7280;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: "Plus Jakarta Sans", sans-serif;
+        line-height: 1.6;
+        min-height: 100vh;
+      }
+
+      /* ── NAV ── */
+      nav {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 40px;
+        height: 64px;
+        background: rgba(13, 13, 13, 0.85);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border);
+      }
+      .logo {
+        font-size: 20px;
+        font-weight: 800;
+        letter-spacing: -0.5px;
+        color: var(--text);
+        text-decoration: none;
+      }
+      .logo span {
+        color: var(--accent);
+      }
+      .nav-links {
+        display: flex;
+        gap: 32px;
+        list-style: none;
+      }
+      .nav-links a {
+        color: var(--muted);
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 500;
+        transition: color 0.2s;
+      }
+      .nav-links a:hover {
+        color: var(--text);
+      }
+      .nav-cta {
+        background: var(--accent);
+        color: #fff;
+        padding: 9px 22px;
+        border-radius: 999px;
+        font-size: 14px;
+        font-weight: 700;
+        text-decoration: none;
+        transition: opacity 0.2s;
+      }
+      .nav-cta:hover {
+        opacity: 0.85;
+      }
+
+      /* ── HERO ── */
+      .hero {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 100px 24px 80px;
+        max-width: 760px;
+        margin: 0 auto;
+      }
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: var(--accent-soft);
+        border: 1px solid rgba(124, 92, 252, 0.3);
+        color: var(--accent);
+        font-size: 12px;
+        font-weight: 700;
+        padding: 6px 14px;
+        border-radius: 999px;
+        margin-bottom: 28px;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+      }
+      h1 {
+        font-size: clamp(40px, 6vw, 72px);
+        font-weight: 800;
+        line-height: 1.08;
+        letter-spacing: -1.5px;
+        margin-bottom: 24px;
+      }
+      h1 .accent {
+        color: var(--accent);
+      }
+      .hero-sub {
+        font-size: 18px;
+        color: var(--muted);
+        max-width: 520px;
+        margin-bottom: 40px;
+        line-height: 1.7;
+      }
+      .cta-group {
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .btn-primary {
+        background: var(--accent);
+        color: #fff;
+        padding: 16px 36px;
+        border-radius: 16px;
+        font-size: 16px;
+        font-weight: 800;
+        text-decoration: none;
+        box-shadow: 0 8px 32px rgba(124, 92, 252, 0.35);
+        transition:
+          transform 0.2s,
+          opacity 0.2s;
+      }
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        opacity: 0.92;
+      }
+      .btn-secondary {
+        background: var(--card);
+        color: var(--text);
+        padding: 16px 36px;
+        border-radius: 16px;
+        font-size: 16px;
+        font-weight: 700;
+        text-decoration: none;
+        border: 1px solid var(--border);
+        transition: border-color 0.2s;
+      }
+      .btn-secondary:hover {
+        border-color: var(--accent);
+      }
+
+      /* ── FEATURES ── */
+      .section {
+        padding: 80px 24px;
+        max-width: 1100px;
+        margin: 0 auto;
+      }
+      .section-label {
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1.2px;
+        color: var(--accent);
+        margin-bottom: 12px;
+        text-align: center;
+      }
+      .section-title {
+        font-size: clamp(28px, 3.5vw, 44px);
+        font-weight: 800;
+        text-align: center;
+        letter-spacing: -0.5px;
+        margin-bottom: 60px;
+      }
+      .features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+      }
+      .feature-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: 28px;
+        transition:
+          border-color 0.2s,
+          transform 0.2s;
+      }
+      .feature-card:hover {
+        border-color: rgba(124, 92, 252, 0.4);
+        transform: translateY(-3px);
+      }
+      .feature-icon {
+        font-size: 28px;
+        margin-bottom: 16px;
+      }
+      .feature-card h3 {
+        font-size: 16px;
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
+      .feature-card p {
+        font-size: 14px;
+        color: var(--muted);
+        line-height: 1.65;
+      }
+
+      /* ── PRICING ── */
+      .pricing {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+      }
+      .price-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 24px;
+        padding: 36px;
+      }
+      .price-card.featured {
+        border-color: var(--accent);
+        background: linear-gradient(
+          145deg,
+          rgba(124, 92, 252, 0.08) 0%,
+          var(--card) 100%
+        );
+      }
+      .price-label {
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: var(--muted);
+        margin-bottom: 12px;
+      }
+      .price-value {
+        font-size: 48px;
+        font-weight: 800;
+        letter-spacing: -1px;
+        margin-bottom: 4px;
+      }
+      .price-period {
+        font-size: 14px;
+        color: var(--muted);
+        margin-bottom: 28px;
+      }
+      .price-badge {
+        display: inline-block;
+        background: var(--accent);
+        color: #fff;
+        font-size: 11px;
+        font-weight: 800;
+        padding: 4px 10px;
+        border-radius: 999px;
+        margin-left: 8px;
+        vertical-align: middle;
+      }
+      .price-features {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 32px;
+      }
+      .price-features li {
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .check {
+        color: var(--accent);
+        font-weight: 700;
+      }
+      .cross {
+        color: var(--muted);
+      }
+
+      /* ── FOOTER ── */
+      footer {
+        border-top: 1px solid var(--border);
+        padding: 48px 40px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+      .footer-links {
+        display: flex;
+        gap: 24px;
+        flex-wrap: wrap;
+      }
+      .footer-links a {
+        color: var(--muted);
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+      .footer-links a:hover {
+        color: var(--text);
+      }
+
+      @media (max-width: 600px) {
+        nav {
+          padding: 0 20px;
+        }
+        .nav-links {
+          display: none;
+        }
+        footer {
+          padding: 32px 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- NAV -->
+    <nav>
+      <a href="index.html" class="logo">SOULI<span>O</span></a>
+      <ul class="nav-links">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="support.html">Support</a></li>
+      </ul>
+      <a href="#pricing" class="nav-cta">Get Started</a>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="badge">✨ AI-Powered Mental Wellness</div>
+      <h1>Know Your<br /><span class="accent">Soul.</span></h1>
+      <p class="hero-sub">
+        Track your moods, talk to an empathetic AI coach, and unlock deep
+        insights about your emotional patterns — every single day.
+      </p>
+      <div class="cta-group">
+        <a href="#pricing" class="btn-primary">Download Free →</a>
+        <a href="#features" class="btn-secondary">See Features</a>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="section" id="features">
+      <p class="section-label">Everything you need</p>
+      <h2 class="section-title">Your complete wellness companion</h2>
+      <div class="features">
+        <div class="feature-card">
+          <div class="feature-icon">✍️</div>
+          <h3>Daily Check-ins</h3>
+          <p>
+            Track mood, intensity, context tags and journal entries in under 60
+            seconds.
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">💜</div>
+          <h3>AI Coach — Soulio</h3>
+          <p>
+            Powered by GPT-4o. Your AI coach reads your mood history and gives
+            warm, personalised guidance.
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📊</div>
+          <h3>Mood Insights</h3>
+          <p>
+            See 7 or 30-day trends, tag breakdowns, streaks and your emotional
+            patterns at a glance.
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔥</div>
+          <h3>Streak Tracking</h3>
+          <p>
+            Build consistency with daily streaks. Current streak and best streak
+            always visible on home.
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔔</div>
+          <h3>Smart Reminders</h3>
+          <p>
+            Set a daily check-in reminder at your preferred time. Never miss a
+            day.
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔒</div>
+          <h3>Private & Secure</h3>
+          <p>
+            All data encrypted at rest via Supabase. Your journal stays yours,
+            always.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRICING -->
+    <section class="section" id="pricing">
+      <p class="section-label">Simple pricing</p>
+      <h2 class="section-title">Start free, go deeper with Premium</h2>
+      <div class="pricing">
+        <div class="price-card">
+          <p class="price-label">Free</p>
+          <div class="price-value">$0</div>
+          <p class="price-period">Forever free</p>
+          <ul class="price-features">
+            <li><span class="check">✓</span> Unlimited check-ins</li>
+            <li><span class="check">✓</span> 7-day mood chart</li>
+            <li><span class="check">✓</span> Streak tracking</li>
+            <li><span class="check">✓</span> 5 AI messages / session</li>
+            <li><span class="cross">—</span> 30-day insights</li>
+            <li><span class="cross">—</span> Unlimited AI chat</li>
+          </ul>
+          <a
+            href="#"
+            class="btn-secondary"
+            style="display: block; text-align: center"
+            >Download App</a
+          >
+        </div>
+        <div class="price-card featured">
+          <p class="price-label">
+            Premium <span class="price-badge">Save 58%</span>
+          </p>
+          <div class="price-value">$49.99</div>
+          <p class="price-period">
+            / year &nbsp;·&nbsp; $4.17 / mo &nbsp;·&nbsp; 7-day free trial
+          </p>
+          <ul class="price-features">
+            <li><span class="check">✓</span> Everything in Free</li>
+            <li>
+              <span class="check">✓</span> <strong>Unlimited AI chat</strong>
+            </li>
+            <li>
+              <span class="check">✓</span> <strong>30-day insights</strong>
+            </li>
+            <li><span class="check">✓</span> Priority responses</li>
+            <li><span class="check">✓</span> PDF / CSV export</li>
+            <li><span class="check">✓</span> Early access to new features</li>
+          </ul>
+          <a
+            href="#"
+            class="btn-primary"
+            style="display: block; text-align: center"
+            >Start Free Trial →</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <span>© 2026 Soulio. All rights reserved.</span>
+      <div class="footer-links">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Service</a>
+        <a href="support.html">Support</a>
+      </div>
+    </footer>
+  </body>
+</html>
