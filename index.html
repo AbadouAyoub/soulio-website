@@ -472,17 +472,17 @@
           transform: translateY(0);
         }
         50% {
-          transform: translateY(-8px);
+          transform: translateY(-6px);
         }
       }
       .phone-halo {
         position: absolute;
-        bottom: -40px;
+        bottom: -30px;
         left: 50%;
         transform: translateX(-50%);
-        width: 200px;
-        height: 60px;
-        background: rgba(124, 92, 252, 0.25);
+        width: 180px;
+        height: 50px;
+        background: rgba(124, 92, 252, 0.2);
         filter: blur(50px);
         pointer-events: none;
         border-radius: 50%;
@@ -490,15 +490,14 @@
       .phone-frame {
         width: 300px;
         height: 620px;
-        background: #0d0d0d;
+        background: #0a0a0f;
         border-radius: 44px;
-        border: 1.5px solid rgba(124, 92, 252, 0.3);
+        border: 1.5px solid rgba(124, 92, 252, 0.25);
         position: relative;
         overflow: hidden;
         box-shadow:
           0 80px 160px rgba(0, 0, 0, 0.7),
-          0 0 0 1px rgba(255, 255, 255, 0.05),
-          0 0 120px rgba(124, 92, 252, 0.15);
+          0 0 120px rgba(124, 92, 252, 0.12);
       }
       .phone-frame::after {
         content: "";
@@ -518,10 +517,10 @@
         top: 0;
         left: 50%;
         transform: translateX(-50%);
-        width: 100px;
-        height: 28px;
+        width: 110px;
+        height: 26px;
         background: #000;
-        border-radius: 0 0 20px 20px;
+        border-radius: 0 0 18px 18px;
         z-index: 25;
       }
       .phone-status {
@@ -531,266 +530,582 @@
         right: 0;
         display: flex;
         justify-content: space-between;
-        padding: 0 22px;
-        font-size: 11px;
-        font-weight: 600;
-        color: rgba(255, 255, 255, 0.7);
+        align-items: center;
+        padding: 0 20px;
         z-index: 26;
+        pointer-events: none;
+      }
+      .ps-time {
+        font-size: 11px;
+        font-weight: 700;
+        color: #fff;
+      }
+      .ps-sig {
+        font-size: 10px;
+        color: rgba(255, 255, 255, 0.7);
+        letter-spacing: 1px;
       }
       .pscreen {
         position: absolute;
         inset: 0;
-        padding: 46px 20px 20px;
         opacity: 0;
         transition: opacity 0.6s ease;
         overflow: hidden;
+        font-family: "DM Sans", sans-serif;
       }
       .pscreen.on {
         opacity: 1;
       }
 
-      /* ─ Screen 1: Home ─ */
-      .ps-greet {
-        font-family: "Syne", sans-serif;
-        font-size: 20px;
-        font-weight: 800;
-        color: #fff;
-        margin-bottom: 4px;
+      /* ── BOTTOM NAV (shared) ── */
+      .ps-bnav {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 52px;
+        background: #111118;
+        border-top: 1px solid #1e1e2e;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        z-index: 10;
       }
-      .ps-date {
-        font-size: 12px;
-        color: #8b82b0;
-        margin-bottom: 24px;
-      }
-      .ps-label {
+      .ps-bnav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2px;
         font-size: 10px;
-        text-transform: uppercase;
-        letter-spacing: 2px;
         color: #8b82b0;
-        margin-bottom: 10px;
       }
-      .ps-moods {
-        display: flex;
-        gap: 7px;
-        margin-bottom: 16px;
+      .ps-bnav-item.active {
+        color: #7c5cfc;
       }
-      .ps-em {
-        width: 48px;
-        height: 48px;
-        border-radius: 14px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 22px;
-        background: #1a1a2e;
-        border: 1px solid #2a2a3e;
-        flex-shrink: 0;
+      .ps-bnav-item > span:first-child {
+        font-size: 17px;
+        line-height: 1;
       }
-      .ps-em.sel {
-        background: #7c5cfc;
-        border-color: #7c5cfc;
-        animation: emScale 1.5s ease-in-out infinite;
-      }
-      @keyframes emScale {
-        0%,
-        100% {
-          transform: scale(1);
-        }
-        50% {
-          transform: scale(1.08);
-        }
-      }
-      .ps-streak {
-        background: rgba(239, 68, 68, 0.12);
-        border: 1px solid rgba(239, 68, 68, 0.3);
-        border-radius: 14px;
-        padding: 14px 16px;
-        margin-bottom: 12px;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-      }
-      .ps-streak-txt {
-        font-size: 14px;
-        font-weight: 600;
-        color: #f97316;
-      }
-      .ps-btn {
-        display: block;
-        width: 100%;
-        text-align: center;
-        background: #7c5cfc;
-        color: #fff;
-        padding: 14px;
-        border-radius: 14px;
-        font-size: 15px;
-        font-weight: 600;
-        border: none;
-        cursor: default;
+      .ps-bnav-item.active > span:first-child {
+        font-size: 19px;
       }
 
-      /* ─ Screen 2: AI Chat ─ */
-      .ps-chat-hd {
+      /* ── SCREEN 1: HOME ── */
+      .ps1-body {
+        padding: 36px 14px 60px;
+        overflow: hidden;
+      }
+      .ps1-date {
+        font-size: 10px;
+        color: #8b82b0;
+      }
+      .ps1-greet1 {
+        font-size: 22px;
+        font-weight: 600;
+        color: #fff;
+        margin-top: 8px;
+        line-height: 1.2;
+      }
+      .ps1-greet2 {
+        font-size: 22px;
+        font-weight: 700;
+        color: #7c5cfc;
+        line-height: 1.2;
+      }
+      .ps1-cin {
+        margin-top: 16px;
+        background: #7c5cfc;
+        border-radius: 20px;
+        padding: 16px;
+      }
+      .ps1-cin-lbl {
+        font-size: 11px;
+        color: rgba(255, 255, 255, 0.7);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+      .ps1-cin-q {
+        font-size: 14px;
+        font-weight: 600;
+        color: #fff;
+        margin-top: 4px;
+      }
+      .ps1-cin-btn {
+        margin-top: 10px;
+        background: #fff;
+        border-radius: 14px;
+        padding: 10px;
+        font-size: 13px;
+        font-weight: 700;
+        color: #7c5cfc;
+        text-align: center;
+      }
+      .ps1-streak {
+        margin-top: 10px;
+        background: #1a1a2e;
+        border-radius: 16px;
+        padding: 12px 14px;
+        border: 1px solid #2a2a3e;
+      }
+      .ps1-streak-head {
+        display: flex;
+        justify-content: space-between;
+      }
+      .ps1-slbl {
+        font-size: 10px;
+        color: #8b82b0;
+      }
+      .ps1-streak-vals {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 4px;
+      }
+      .ps1-sval {
+        font-size: 17px;
+        font-weight: 700;
+        color: #fff;
+      }
+      .ps1-sval-g {
+        font-size: 17px;
+        font-weight: 700;
+        color: #10b981;
+      }
+      .ps1-sdiv {
+        height: 1px;
+        background: #2a2a3e;
+        margin: 8px 0;
+      }
+      .ps1-sfoot {
+        font-size: 11px;
+        color: #8b82b0;
+        text-align: center;
+      }
+      .ps1-stats {
+        margin-top: 8px;
+        display: flex;
+        gap: 8px;
+      }
+      .ps1-sc {
+        flex: 1;
+        background: #1a1a2e;
+        border-radius: 14px;
+        padding: 10px;
+        border: 1px solid #2a2a3e;
+      }
+      .ps1-sc-lbl {
+        font-size: 10px;
+        color: #8b82b0;
+      }
+      .ps1-sc-ico {
+        font-size: 18px;
+        margin-top: 4px;
+        line-height: 1;
+      }
+      .ps1-sc-num {
+        font-size: 18px;
+        font-weight: 700;
+        color: #fff;
+        margin-top: 4px;
+        line-height: 1;
+      }
+      .ps1-sc-sub {
+        font-size: 9px;
+        color: #8b82b0;
+        margin-top: 2px;
+      }
+      .ps1-reflect {
+        margin-top: 8px;
+        background: #1a1a2e;
+        border-radius: 14px;
+        padding: 12px;
+        border: 1px solid #2a2a3e;
+      }
+      .ps1-r-lbl {
+        font-size: 9px;
+        color: #7c5cfc;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+      }
+      .ps1-r-q {
+        font-size: 12px;
+        color: #fff;
+        margin-top: 5px;
+        font-style: italic;
+        line-height: 1.4;
+      }
+      .ps1-r-by {
+        font-size: 10px;
+        color: #8b82b0;
+        margin-top: 3px;
+      }
+      .ps1-talk {
+        margin-top: 8px;
+        background: #1a1a2e;
+        border-radius: 14px;
+        padding: 12px;
+        border: 1px solid #2a2a3e;
         display: flex;
         align-items: center;
         gap: 10px;
-        margin-bottom: 20px;
-        padding-bottom: 12px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
       }
-      .ps-chat-ava {
-        width: 32px;
-        height: 32px;
-        background: linear-gradient(135deg, #7c5cfc, #a78bfa);
+      .ps1-talk-ava {
+        width: 36px;
+        height: 36px;
         border-radius: 50%;
+        background: linear-gradient(135deg, #7c5cfc, #a78bfa);
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 13px;
-        font-weight: 800;
+        font-size: 16px;
+        flex-shrink: 0;
+      }
+      .ps1-talk-mid {
+        flex: 1;
+        min-width: 0;
+      }
+      .ps1-talk-title {
+        font-size: 12px;
+        font-weight: 700;
+        color: #fff;
+      }
+      .ps1-talk-sub {
+        font-size: 10px;
+        color: #8b82b0;
+        line-height: 1.3;
+        margin-top: 2px;
+      }
+      .ps1-talk-arr {
+        font-size: 16px;
+        color: #8b82b0;
+        flex-shrink: 0;
+      }
+
+      /* ── SCREEN 2: AI CHAT ── */
+      .ps2-body {
+        padding: 36px 14px 60px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+      .ps2-head {
+        display: flex;
+        align-items: center;
+        margin-top: 8px;
+      }
+      .ps2-ava {
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #7c5cfc, #a78bfa);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        flex-shrink: 0;
+      }
+      .ps2-head-mid {
+        margin-left: 10px;
+        flex: 1;
+      }
+      .ps2-nm {
+        font-size: 15px;
+        font-weight: 700;
+        color: #fff;
+      }
+      .ps2-sub {
+        font-size: 11px;
+        color: #8b82b0;
+      }
+      .ps2-badge {
+        background: rgba(124, 92, 252, 0.2);
+        border: 1px solid rgba(124, 92, 252, 0.4);
+        border-radius: 999px;
+        padding: 4px 10px;
+        font-size: 11px;
+        font-weight: 700;
+        color: #a78bfa;
+        white-space: nowrap;
+      }
+      .ps2-div {
+        height: 1px;
+        background: #1e1e2e;
+        margin-top: 12px;
+      }
+      .ps2-msgs {
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        overflow: hidden;
+      }
+      .ps2-sender {
+        font-size: 10px;
+        color: #8b82b0;
+        margin-bottom: 3px;
+      }
+      .ps2-bai {
+        background: #1e1e30;
+        border-radius: 16px 16px 16px 4px;
+        padding: 10px 12px;
+        max-width: 90%;
+        font-size: 11px;
+        color: #e0d8ff;
+        line-height: 1.5;
+      }
+      .ps2-buser {
+        background: #7c5cfc;
+        border-radius: 16px 16px 4px 16px;
+        padding: 8px 12px;
+        margin-left: auto;
+        max-width: 75%;
+        font-size: 11px;
+        color: #fff;
+        align-self: flex-end;
+      }
+      .ps2-input-bar {
+        position: absolute;
+        bottom: 52px;
+        left: 0;
+        right: 0;
+        background: #0a0a0f;
+        padding: 6px 14px;
+        display: flex;
+        gap: 8px;
+        align-items: center;
+      }
+      .ps2-input {
+        flex: 1;
+        background: #1a1a2e;
+        border-radius: 999px;
+        padding: 9px 14px;
+        font-size: 11px;
+        color: #8b82b0;
+        border: 1px solid #2a2a3e;
+        font-family: "DM Sans", sans-serif;
+      }
+      .ps2-send {
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        background: #1a1a2e;
+        border: 1px solid #2a2a3e;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
         color: #fff;
         flex-shrink: 0;
       }
-      .ps-chat-nm {
+
+      /* ── SCREEN 3: INSIGHTS ── */
+      .ps3-body {
+        padding: 36px 14px 60px;
+        overflow: hidden;
+      }
+      .ps3-title {
         font-family: "Syne", sans-serif;
+        font-size: 20px;
+        font-weight: 700;
+        color: #fff;
+        margin-top: 8px;
+      }
+      .ps3-sub {
+        font-size: 10px;
+        color: #8b82b0;
+        margin-top: 2px;
+      }
+      .ps3-toggle {
+        margin-top: 12px;
+        background: #1a1a2e;
+        border-radius: 999px;
+        padding: 3px;
+        display: flex;
+        border: 1px solid #2a2a3e;
+        width: fit-content;
+      }
+      .ps3-tog-a {
+        background: #7c5cfc;
+        color: #fff;
+        border-radius: 999px;
+        padding: 6px 16px;
+        font-size: 11px;
+        font-weight: 700;
+      }
+      .ps3-tog-i {
+        color: #8b82b0;
+        padding: 6px 12px;
+        font-size: 11px;
+      }
+      .ps3-stats {
+        margin-top: 12px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 6px;
+      }
+      .ps3-sc {
+        background: #1a1a2e;
+        border-radius: 12px;
+        padding: 10px;
+        border: 1px solid #2a2a3e;
+      }
+      .ps3-sc-ico {
         font-size: 16px;
-        font-weight: 800;
+      }
+      .ps3-sc-lbl {
+        font-size: 9px;
+        color: #8b82b0;
+        margin-top: 3px;
+      }
+      .ps3-sc-acc {
+        font-size: 16px;
+        font-weight: 700;
+        color: #7c5cfc;
+        margin-top: 2px;
+      }
+      .ps3-sc-wh {
+        font-size: 13px;
+        font-weight: 700;
+        color: #fff;
+        margin-top: 2px;
+      }
+      .ps3-sc-gr {
+        font-size: 13px;
+        font-weight: 700;
+        color: #10b981;
+        margin-top: 2px;
+      }
+      .ps3-sc-bot {
+        font-size: 9px;
+        color: #8b82b0;
+        margin-top: 2px;
+      }
+      .ps3-chart-card {
+        margin-top: 10px;
+        background: #1a1a2e;
+        border-radius: 14px;
+        padding: 14px;
+        border: 1px solid #2a2a3e;
+      }
+      .ps3-ct-title {
+        font-size: 13px;
+        font-weight: 700;
         color: #fff;
       }
-      .chat-msgs {
+      .ps3-ct-sub {
+        font-size: 9px;
+        color: #8b82b0;
+        margin-top: 2px;
+      }
+      .ps3-bars {
+        margin-top: 12px;
+        height: 70px;
+        display: flex;
+        justify-content: space-around;
+        align-items: flex-end;
+      }
+      .ps3-bar-col {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2px;
+        width: 28px;
+      }
+      .ps3-bar-ico {
+        font-size: 11px;
+        min-height: 14px;
+        line-height: 1;
+      }
+      .ps3-bar-fill {
+        width: 28px;
+        background: #6b6b7b;
+        border-radius: 6px 6px 0 0;
+      }
+      .ps3-bar-empty {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #2a2a3e;
+        margin-bottom: 4px;
+      }
+      .ps3-days {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 4px;
+      }
+      .ps3-day {
+        font-size: 9px;
+        color: #8b82b0;
+        width: 28px;
+        text-align: center;
+      }
+      .ps3-legend {
+        margin-top: 8px;
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .ps3-leg-item {
+        display: flex;
+        align-items: center;
+        gap: 3px;
+        font-size: 9px;
+        color: #8b82b0;
+      }
+      .ps3-leg-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        flex-shrink: 0;
+      }
+      .ps3-tags-card {
+        margin-top: 10px;
+        background: #1a1a2e;
+        border-radius: 14px;
+        padding: 14px;
+        border: 1px solid #2a2a3e;
+      }
+      .ps3-tags-title {
+        font-size: 13px;
+        font-weight: 700;
+        color: #fff;
+      }
+      .ps3-tags-sub {
+        font-size: 9px;
+        color: #8b82b0;
+        margin-top: 2px;
+      }
+      .ps3-tag-bars {
+        margin-top: 10px;
         display: flex;
         flex-direction: column;
         gap: 10px;
       }
-      .cb {
-        padding: 10px 14px;
+      .ps3-tag-top {
+        display: flex;
+        justify-content: space-between;
+      }
+      .ps3-tag-name {
         font-size: 12px;
-        line-height: 1.5;
-      }
-      .cb-ai {
-        background: #1e1e30;
-        border-radius: 16px 16px 16px 4px;
-        color: #e0d8ff;
-        align-self: flex-start;
-        max-width: 85%;
-      }
-      .cb-user {
-        background: #7c5cfc;
-        border-radius: 16px 16px 4px 16px;
         color: #fff;
-        align-self: flex-end;
-        margin-left: auto;
-        max-width: 75%;
       }
-      .typing-dots {
-        display: flex;
-        align-items: center;
-        gap: 5px;
-        background: #1e1e30;
-        border-radius: 12px;
-        padding: 10px 14px;
-        width: fit-content;
-      }
-      .tdot {
-        width: 6px;
-        height: 6px;
-        border-radius: 50%;
-        background: #7c5cfc;
-        animation: tdot 1.2s ease infinite;
-      }
-      .tdot:nth-child(2) {
-        animation-delay: 0.2s;
-      }
-      .tdot:nth-child(3) {
-        animation-delay: 0.4s;
-      }
-      @keyframes tdot {
-        0%,
-        100% {
-          transform: scale(1);
-          opacity: 0.4;
-        }
-        40% {
-          transform: scale(1.5);
-          opacity: 1;
-        }
-      }
-
-      /* ─ Screen 3: Analytics ─ */
-      .ps-atitle {
-        font-family: "Syne", sans-serif;
-        font-size: 20px;
-        font-weight: 800;
-        color: #fff;
-        margin-bottom: 4px;
-      }
-      .ps-subtitle {
-        font-size: 12px;
-        color: #8b82b0;
-        margin-bottom: 20px;
-      }
-      .ps-chart {
-        display: flex;
-        align-items: flex-end;
-        gap: 6px;
-        height: 80px;
-        margin-bottom: 8px;
-      }
-      .ps-cbar {
-        width: 28px;
-        border-radius: 8px 8px 0 0;
-        background: linear-gradient(
-          180deg,
-          #7c5cfc 0%,
-          rgba(167, 139, 250, 0.25) 100%
-        );
-        flex-shrink: 0;
-      }
-      .ps-cbar.today {
-        background: #7c5cfc;
-      }
-      .ps-days2 {
-        display: flex;
-        gap: 6px;
-        margin-bottom: 20px;
-      }
-      .ps-day2 {
-        width: 28px;
-        text-align: center;
+      .ps3-tag-count {
         font-size: 10px;
         color: #8b82b0;
-        flex-shrink: 0;
       }
-      .ps-day2.today {
-        color: #a78bfa;
-        font-weight: 600;
+      .ps3-tag-track {
+        height: 4px;
+        background: #2a2a3e;
+        border-radius: 2px;
+        margin-top: 5px;
       }
-      .ps-statrow {
-        display: flex;
-        gap: 12px;
-      }
-      .ps-statcard {
-        flex: 1;
-        background: rgba(124, 92, 252, 0.1);
-        border: 1px solid rgba(124, 92, 252, 0.2);
-        border-radius: 12px;
-        padding: 12px;
-      }
-      .ps-statlbl {
-        font-size: 10px;
-        color: #8b82b0;
-        margin-bottom: 5px;
-      }
-      .ps-statval {
-        font-size: 14px;
-        font-weight: 700;
-        color: #fff;
-      }
-      .ps-statval.green {
-        color: #10b981;
+      .ps3-tag-fill {
+        height: 4px;
+        background: #7c5cfc;
+        border-radius: 2px;
       }
 
-      /* ─ Screen dots indicator ─ */
+      /* ── SCREEN DOTS INDICATOR ── */
       .phone-dots {
         display: flex;
         gap: 8px;
@@ -807,7 +1122,7 @@
       }
       .pdot.active {
         background: #7c5cfc;
-        width: 20px;
+        width: 18px;
         border-radius: 3px;
       }
 
@@ -1027,7 +1342,9 @@
         padding: 8px 22px;
         border-radius: 999px;
         cursor: pointer;
-        transition: background 0.3s ease, color 0.3s ease;
+        transition:
+          background 0.3s ease,
+          color 0.3s ease;
         display: flex;
         align-items: center;
         gap: 8px;
@@ -1116,7 +1433,9 @@
         letter-spacing: -3px;
         line-height: 1;
         margin-bottom: 4px;
-        transition: opacity 0.2s ease, transform 0.2s ease;
+        transition:
+          opacity 0.2s ease,
+          transform 0.2s ease;
       }
       .price-amount sup {
         font-size: 26px;
@@ -1531,94 +1850,182 @@
         </div>
         <div class="hero-right" aria-label="App preview">
           <div class="phone-scene">
-            <div
-              class="phone-frame"
-              role="img"
-              aria-label="Soulio app showing mood tracking and AI chat"
-            >
+            <div class="phone-frame" role="img" aria-label="Soulio app screens">
               <div class="phone-notch" aria-hidden="true"></div>
               <div class="phone-status" aria-hidden="true">
-                <span>9:41</span><span>&#x25CF;&#x25CF;&#x25CF; &#x2590;</span>
+                <span class="ps-time">22:14</span>
+                <span class="ps-sig">&#x25AA;&#x25AA;&#x25AA; &#x25C9; &#x25AA;</span>
               </div>
 
-              <!-- Screen 1 &#x2014; Home -->
+              <!-- Screen 1: Home -->
               <div class="pscreen on" id="ps1" aria-hidden="true">
-                <div class="ps-greet">Good morning, Ayoub &#x2728;</div>
-                <div class="ps-date">
-                  Friday, 20 Feb &middot; How are you feeling?
+                <div class="ps1-body">
+                  <div class="ps1-date">Friday, February 20</div>
+                  <div class="ps1-greet1">Good evening,</div>
+                  <div class="ps1-greet2">katalina &#x1F44B;</div>
+                  <div class="ps1-cin">
+                    <div class="ps1-cin-lbl">Daily check-in</div>
+                    <div class="ps1-cin-q">How are you feeling today?</div>
+                    <div class="ps1-cin-btn">Start Check-in &#x2728;</div>
+                  </div>
+                  <div class="ps1-streak">
+                    <div class="ps1-streak-head">
+                      <span class="ps1-slbl">Current streak</span>
+                      <span class="ps1-slbl">Best streak</span>
+                    </div>
+                    <div class="ps1-streak-vals">
+                      <span class="ps1-sval">&#x1F525; 1 days</span>
+                      <span class="ps1-sval-g">1</span>
+                    </div>
+                    <div class="ps1-sdiv"></div>
+                    <div class="ps1-sfoot">Keep it up! 1 day in a row &#x1F525;</div>
+                  </div>
+                  <div class="ps1-stats">
+                    <div class="ps1-sc">
+                      <div class="ps1-sc-lbl">Mood avg</div>
+                      <div class="ps1-sc-ico">&#x1F610;</div>
+                      <div class="ps1-sc-sub">7 days</div>
+                    </div>
+                    <div class="ps1-sc">
+                      <div class="ps1-sc-lbl">Entries</div>
+                      <div class="ps1-sc-num">4</div>
+                      <div class="ps1-sc-sub">total</div>
+                    </div>
+                  </div>
+                  <div class="ps1-reflect">
+                    <div class="ps1-r-lbl">&#x1F4AC; Daily Reflection</div>
+                    <div class="ps1-r-q">&ldquo;Check in with yourself &mdash; it matters.&rdquo;</div>
+                    <div class="ps1-r-by">&mdash; Soulio</div>
+                  </div>
+                  <div class="ps1-talk">
+                    <div class="ps1-talk-ava">&#x1F49C;</div>
+                    <div class="ps1-talk-mid">
+                      <div class="ps1-talk-title">Talk to Soulio</div>
+                      <div class="ps1-talk-sub">Your AI coach is ready &mdash; 5 free messages.</div>
+                    </div>
+                    <div class="ps1-talk-arr">&#x203A;</div>
+                  </div>
                 </div>
-                <div class="ps-label">Select your mood</div>
-                <div class="ps-moods">
-                  <div class="ps-em">&#x1F614;</div>
-                  <div class="ps-em">&#x1F615;</div>
-                  <div class="ps-em sel">&#x1F610;</div>
-                  <div class="ps-em">&#x1F642;</div>
-                  <div class="ps-em">&#x1F929;</div>
+                <div class="ps-bnav">
+                  <div class="ps-bnav-item active"><span>&#x1F3E0;</span><span>Home</span></div>
+                  <div class="ps-bnav-item"><span>&#x1F4AC;</span><span>Soulio</span></div>
+                  <div class="ps-bnav-item"><span>&#x1F4CA;</span><span>Insights</span></div>
+                  <div class="ps-bnav-item"><span>&#x1F464;</span><span>Profile</span></div>
                 </div>
-                <div class="ps-streak">
-                  <span style="font-size: 20px">&#x1F525;</span>
-                  <span class="ps-streak-txt">14-day streak!</span>
-                </div>
-                <button class="ps-btn">Check in now</button>
               </div>
 
-              <!-- Screen 2 &#x2014; AI Chat -->
+              <!-- Screen 2: AI Chat -->
               <div class="pscreen" id="ps2" aria-hidden="true">
-                <div class="ps-chat-hd">
-                  <div class="ps-chat-ava">S</div>
-                  <span class="ps-chat-nm">Soulio</span>
+                <div class="ps2-body">
+                  <div class="ps2-head">
+                    <div class="ps2-ava">&#x1F49C;</div>
+                    <div class="ps2-head-mid">
+                      <div class="ps2-nm">Soulio</div>
+                      <div class="ps2-sub">Your AI wellness coach</div>
+                    </div>
+                    <div class="ps2-badge">3 left</div>
+                  </div>
+                  <div class="ps2-div"></div>
+                  <div class="ps2-msgs">
+                    <div>
+                      <div class="ps2-sender">&#x1F49C; Soulio</div>
+                      <div class="ps2-bai">Hey Katalina! How are you feeling today? I noticed some ups and downs recently, particularly around sleep and money. I&#x27;m here to chat.</div>
+                    </div>
+                    <div class="ps2-buser">Hey soulio</div>
+                    <div>
+                      <div class="ps2-sender">&#x1F49C; Soulio</div>
+                      <div class="ps2-bai">Hey Katalina! It&#x27;s great to hear from you. How&#x27;s your day going so far?</div>
+                    </div>
+                    <div class="ps2-buser">I&#x27;m great, what about you?</div>
+                    <div>
+                      <div class="ps2-sender">&#x1F49C; Soulio</div>
+                      <div class="ps2-bai">I&#x27;m glad you&#x27;re feeling great! Is there anything specific on your mind today?</div>
+                    </div>
+                  </div>
                 </div>
-                <div class="chat-msgs">
-                  <div class="cb cb-ai">
-                    I noticed you feel better after exercise &#x2014; your mood
-                    jumps +2.3 pts on gym days &#x1F4AA;
-                  </div>
-                  <div class="cb cb-user">
-                    Really? That&#x27;s interesting &#x1F62E;
-                  </div>
-                  <div class="cb cb-ai">
-                    Want to set a weekly movement goal to boost your baseline
-                    mood?
-                  </div>
-                  <div class="typing-dots">
-                    <div class="tdot"></div>
-                    <div class="tdot"></div>
-                    <div class="tdot"></div>
-                  </div>
+                <div class="ps2-input-bar">
+                  <div class="ps2-input">Message Soulio...</div>
+                  <div class="ps2-send">&#x203A;</div>
+                </div>
+                <div class="ps-bnav">
+                  <div class="ps-bnav-item"><span>&#x1F3E0;</span><span>Home</span></div>
+                  <div class="ps-bnav-item active"><span>&#x1F4AC;</span><span>Soulio</span></div>
+                  <div class="ps-bnav-item"><span>&#x1F4CA;</span><span>Insights</span></div>
+                  <div class="ps-bnav-item"><span>&#x1F464;</span><span>Profile</span></div>
                 </div>
               </div>
 
-              <!-- Screen 3 &#x2014; Analytics -->
+              <!-- Screen 3: Insights -->
               <div class="pscreen" id="ps3" aria-hidden="true">
-                <div class="ps-atitle">Your week</div>
-                <div class="ps-subtitle">Feb 14 &ndash; Feb 20</div>
-                <div class="ps-chart">
-                  <div class="ps-cbar" style="height: 40%"></div>
-                  <div class="ps-cbar" style="height: 55%"></div>
-                  <div class="ps-cbar" style="height: 35%"></div>
-                  <div class="ps-cbar" style="height: 70%"></div>
-                  <div class="ps-cbar" style="height: 85%"></div>
-                  <div class="ps-cbar" style="height: 65%"></div>
-                  <div class="ps-cbar today" style="height: 90%"></div>
-                </div>
-                <div class="ps-days2">
-                  <div class="ps-day2">Mo</div>
-                  <div class="ps-day2">Tu</div>
-                  <div class="ps-day2">We</div>
-                  <div class="ps-day2">Th</div>
-                  <div class="ps-day2">Fr</div>
-                  <div class="ps-day2">Sa</div>
-                  <div class="ps-day2 today">Su</div>
-                </div>
-                <div class="ps-statrow">
-                  <div class="ps-statcard">
-                    <div class="ps-statlbl">&#x1F4AA; Top trigger</div>
-                    <div class="ps-statval">Sport</div>
+                <div class="ps3-body">
+                  <div class="ps3-title">Insights &#x1F4CA;</div>
+                  <div class="ps3-sub">Your emotional patterns at a glance</div>
+                  <div class="ps3-toggle">
+                    <div class="ps3-tog-a">Last 7 days</div>
+                    <div class="ps3-tog-i">Last 30 days &#x1F512;</div>
                   </div>
-                  <div class="ps-statcard">
-                    <div class="ps-statlbl">&#x1F4C8; Weekly avg</div>
-                    <div class="ps-statval green">7.4 / 10</div>
+                  <div class="ps3-stats">
+                    <div class="ps3-sc">
+                      <div class="ps3-sc-ico">&#x270D;</div>
+                      <div class="ps3-sc-lbl">Check-ins</div>
+                      <div class="ps3-sc-acc">4</div>
+                      <div class="ps3-sc-bot">last 7 days</div>
+                    </div>
+                    <div class="ps3-sc">
+                      <div class="ps3-sc-ico">&#x1F610;</div>
+                      <div class="ps3-sc-lbl">Avg mood</div>
+                      <div class="ps3-sc-wh">Neutral</div>
+                    </div>
+                    <div class="ps3-sc">
+                      <div class="ps3-sc-ico">&#x1F642;</div>
+                      <div class="ps3-sc-lbl">Best mood</div>
+                      <div class="ps3-sc-gr">Good</div>
+                    </div>
                   </div>
+                  <div class="ps3-chart-card">
+                    <div class="ps3-ct-title">Mood this week</div>
+                    <div class="ps3-ct-sub">Daily average &mdash; tap a bar to see details</div>
+                    <div class="ps3-bars">
+                      <div class="ps3-bar-col"><div class="ps3-bar-ico"></div><div class="ps3-bar-empty"></div></div>
+                      <div class="ps3-bar-col"><div class="ps3-bar-ico"></div><div class="ps3-bar-empty"></div></div>
+                      <div class="ps3-bar-col"><div class="ps3-bar-ico"></div><div class="ps3-bar-empty"></div></div>
+                      <div class="ps3-bar-col"><div class="ps3-bar-ico"></div><div class="ps3-bar-empty"></div></div>
+                      <div class="ps3-bar-col"><div class="ps3-bar-ico"></div><div class="ps3-bar-empty"></div></div>
+                      <div class="ps3-bar-col"><div class="ps3-bar-ico"></div><div class="ps3-bar-empty"></div></div>
+                      <div class="ps3-bar-col"><div class="ps3-bar-ico">&#x1F610;</div><div class="ps3-bar-fill" style="height:52px"></div></div>
+                    </div>
+                    <div class="ps3-days">
+                      <div class="ps3-day">Sat</div>
+                      <div class="ps3-day">Sun</div>
+                      <div class="ps3-day">Mon</div>
+                      <div class="ps3-day">Tue</div>
+                      <div class="ps3-day">Wed</div>
+                      <div class="ps3-day">Thu</div>
+                      <div class="ps3-day">Fri</div>
+                    </div>
+                    <div class="ps3-legend">
+                      <div class="ps3-leg-item"><div class="ps3-leg-dot" style="background:#ef4444"></div>Rough</div>
+                      <div class="ps3-leg-item"><div class="ps3-leg-dot" style="background:#f97316"></div>Low</div>
+                      <div class="ps3-leg-item"><div class="ps3-leg-dot" style="background:#6b7280"></div>Neutral</div>
+                      <div class="ps3-leg-item"><div class="ps3-leg-dot" style="background:#10b981"></div>Good</div>
+                      <div class="ps3-leg-item"><div class="ps3-leg-dot" style="background:#7c5cfc"></div>Great</div>
+                    </div>
+                  </div>
+                  <div class="ps3-tags-card">
+                    <div class="ps3-tags-title">What&#x27;s on your mind</div>
+                    <div class="ps3-tags-sub">Most frequent check-in tags</div>
+                    <div class="ps3-tag-bars">
+                      <div><div class="ps3-tag-top"><span class="ps3-tag-name">Money</span><span class="ps3-tag-count">3x</span></div><div class="ps3-tag-track"><div class="ps3-tag-fill" style="width:100%"></div></div></div>
+                      <div><div class="ps3-tag-top"><span class="ps3-tag-name">Work</span><span class="ps3-tag-count">2x</span></div><div class="ps3-tag-track"><div class="ps3-tag-fill" style="width:65%"></div></div></div>
+                      <div><div class="ps3-tag-top"><span class="ps3-tag-name">Sleep</span><span class="ps3-tag-count">2x</span></div><div class="ps3-tag-track"><div class="ps3-tag-fill" style="width:55%"></div></div></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="ps-bnav">
+                  <div class="ps-bnav-item"><span>&#x1F3E0;</span><span>Home</span></div>
+                  <div class="ps-bnav-item"><span>&#x1F4AC;</span><span>Soulio</span></div>
+                  <div class="ps-bnav-item active"><span>&#x1F4CA;</span><span>Insights</span></div>
+                  <div class="ps-bnav-item"><span>&#x1F464;</span><span>Profile</span></div>
                 </div>
               </div>
             </div>
@@ -1769,7 +2176,11 @@
       <p class="sec-sub reveal">
         No hidden fees. Cancel anytime. First 7 days of Premium are always free.
       </p>
-      <div class="billing-toggle reveal" role="group" aria-label="Billing period">
+      <div
+        class="billing-toggle reveal"
+        role="group"
+        aria-label="Billing period"
+      >
         <button class="toggle-btn active" data-period="monthly">Monthly</button>
         <button class="toggle-btn" data-period="yearly">
           Yearly <span class="save-badge">Save 40%</span>
@@ -1798,16 +2209,29 @@
         <div class="p-card feat reveal">
           <div class="pop-tag">Most Popular</div>
           <p class="p-tier">Premium</p>
-          <div class="price-amount" id="prem-price"><sup>$</sup><span id="prem-num">6.99</span></div>
+          <div class="price-amount" id="prem-price">
+            <sup>$</sup><span id="prem-num">6.99</span>
+          </div>
           <p class="price-period" id="prem-period">/ month</p>
-          <p class="price-note" id="prem-note">Billed monthly &middot; Cancel anytime</p>
+          <p class="price-note" id="prem-note">
+            Billed monthly &middot; Cancel anytime
+          </p>
           <p class="price-trial">&#10003; 7-day free trial included</p>
           <div class="p-div"></div>
           <ul class="p-feats">
             <li><span class="pck">&#10003;</span> Everything in Free</li>
-            <li><span class="pck">&#10003;</span> <strong>Unlimited check-ins</strong></li>
-            <li><span class="pck">&#10003;</span> <strong>Unlimited AI chat</strong></li>
-            <li><span class="pck">&#10003;</span> <strong>90-day analytics</strong></li>
+            <li>
+              <span class="pck">&#10003;</span>
+              <strong>Unlimited check-ins</strong>
+            </li>
+            <li>
+              <span class="pck">&#10003;</span>
+              <strong>Unlimited AI chat</strong>
+            </li>
+            <li>
+              <span class="pck">&#10003;</span>
+              <strong>90-day analytics</strong>
+            </li>
             <li><span class="pck">&#10003;</span> Weekly soul report</li>
             <li><span class="pck">&#10003;</span> PDF export</li>
             <li><span class="pck">&#10003;</span> Priority support</li>
@@ -1816,8 +2240,16 @@
           <a href="#" class="btn-p">Start Free Trial &rarr;</a>
         </div>
       </div>
-      <p style="text-align:center;margin-top:24px;font-size:13px;color:var(--muted);">
-        Secure via App Store &amp; Google Play &nbsp;&bull;&nbsp; Cancel anytime &nbsp;&bull;&nbsp; No credit card for trial
+      <p
+        style="
+          text-align: center;
+          margin-top: 24px;
+          font-size: 13px;
+          color: var(--muted);
+        "
+      >
+        Secure via App Store &amp; Google Play &nbsp;&bull;&nbsp; Cancel anytime
+        &nbsp;&bull;&nbsp; No credit card for trial
       </p>
     </section>
 
@@ -2039,12 +2471,22 @@
       var premPeriod = document.getElementById("prem-period");
       var premNote = document.getElementById("prem-note");
       var pricingData = {
-        monthly: { num: "6.99",  period: "/ month", note: "Billed monthly \u00b7 Cancel anytime" },
-        yearly:  { num: "49.99", period: "/ year",  note: "That\u2019s only $4.17 / month" }
+        monthly: {
+          num: "6.99",
+          period: "/ month",
+          note: "Billed monthly \u00b7 Cancel anytime",
+        },
+        yearly: {
+          num: "49.99",
+          period: "/ year",
+          note: "That\u2019s only $4.17 / month",
+        },
       };
       toggleBtns.forEach(function (btn) {
         btn.addEventListener("click", function () {
-          toggleBtns.forEach(function (b) { b.classList.remove("active"); });
+          toggleBtns.forEach(function (b) {
+            b.classList.remove("active");
+          });
           btn.classList.add("active");
           var d = pricingData[btn.dataset.period];
           if (premPrice) {
