@@ -3,7 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Soulio Know Your Soul</title>
+    <title>Soulio — Know Your Soul</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='fg' x1='0' y1='0' x2='1' y2='1'><stop offset='0%25' stop-color='%23c084fc'/><stop offset='48%25' stop-color='%237C5CFC'/><stop offset='100%25' stop-color='%234338ca'/></linearGradient></defs><rect width='100' height='100' rx='22' fill='url(%23fg)'/><text x='50' y='72' font-size='62' font-weight='900' font-family='Arial,sans-serif' fill='white' text-anchor='middle'>S</text></svg>">
     <meta
       name="description"
       content="Track your moods, talk to an empathetic AI coach, and unlock deep insights about your emotional patterns  every single day."
@@ -11,7 +12,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Syne:wght@800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap"
       rel="stylesheet"
     />
     <style>
@@ -199,12 +200,14 @@
         transform: translateY(-100%);
       }
       .nav-logo {
-        font-family: "Syne", sans-serif;
-        font-size: 19px;
-        color: var(--accent2);
+        display: inline-flex;
+        align-items: center;
+        line-height: 0;
         text-decoration: none;
-        letter-spacing: 0.5px;
+        flex-shrink: 0;
+        transition: opacity 0.2s;
       }
+      .nav-logo:hover { opacity: 0.88; }
       .nav-links {
         display: flex;
         gap: 32px;
@@ -1707,11 +1710,13 @@
         gap: 24px;
       }
       .footer-logo {
-        font-family: "Syne", sans-serif;
-        font-size: 18px;
-        color: var(--accent2);
+        display: inline-flex;
+        align-items: center;
+        line-height: 0;
         text-decoration: none;
+        transition: opacity 0.2s;
       }
+      .footer-logo:hover { opacity: 0.85; }
       .footer-links {
         display: flex;
         gap: 28px;
@@ -1809,7 +1814,15 @@
 
     <!-- NAV -->
     <nav id="nav" role="banner">
-      <a href="index.html" class="nav-logo">SOULIO</a>
+      <a href="index.html" class="nav-logo" aria-label="Soulio">
+        <svg width="140" height="35" viewBox="0 0 175 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="snav" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#c084fc"/><stop offset="48%" stop-color="#7C5CFC"/><stop offset="100%" stop-color="#4338ca"/></linearGradient></defs>
+          <rect width="42" height="42" rx="12" fill="url(#snav)"/>
+          <ellipse cx="14" cy="13" rx="7" ry="4.5" fill="white" opacity="0.16" transform="rotate(-22 14 13)"/>
+          <text x="21" y="32" font-family="'Plus Jakarta Sans',sans-serif" font-size="24" font-weight="800" fill="white" text-anchor="middle">S</text>
+          <text x="53" y="28" font-family="'Plus Jakarta Sans',sans-serif" font-size="20" font-weight="800" fill="#f0eeff" letter-spacing="-0.3">SOULIO</text>
+        </svg>
+      </a>
       <ul class="nav-links" role="list">
         <li><a href="#features">Features</a></li>
         <li><a href="#pricing">Pricing</a></li>
@@ -1854,7 +1867,9 @@
               <div class="phone-notch" aria-hidden="true"></div>
               <div class="phone-status" aria-hidden="true">
                 <span class="ps-time">22:14</span>
-                <span class="ps-sig">&#x25AA;&#x25AA;&#x25AA; &#x25C9; &#x25AA;</span>
+                <span class="ps-sig"
+                  >&#x25AA;&#x25AA;&#x25AA; &#x25C9; &#x25AA;</span
+                >
               </div>
 
               <!-- Screen 1: Home -->
@@ -1878,7 +1893,9 @@
                       <span class="ps1-sval-g">1</span>
                     </div>
                     <div class="ps1-sdiv"></div>
-                    <div class="ps1-sfoot">Keep it up! 1 day in a row &#x1F525;</div>
+                    <div class="ps1-sfoot">
+                      Keep it up! 1 day in a row &#x1F525;
+                    </div>
                   </div>
                   <div class="ps1-stats">
                     <div class="ps1-sc">
@@ -1894,23 +1911,35 @@
                   </div>
                   <div class="ps1-reflect">
                     <div class="ps1-r-lbl">&#x1F4AC; Daily Reflection</div>
-                    <div class="ps1-r-q">&ldquo;Check in with yourself &mdash; it matters.&rdquo;</div>
+                    <div class="ps1-r-q">
+                      &ldquo;Check in with yourself &mdash; it matters.&rdquo;
+                    </div>
                     <div class="ps1-r-by">&mdash; Soulio</div>
                   </div>
                   <div class="ps1-talk">
                     <div class="ps1-talk-ava">&#x1F49C;</div>
                     <div class="ps1-talk-mid">
                       <div class="ps1-talk-title">Talk to Soulio</div>
-                      <div class="ps1-talk-sub">Your AI coach is ready &mdash; 5 free messages.</div>
+                      <div class="ps1-talk-sub">
+                        Your AI coach is ready &mdash; 5 free messages.
+                      </div>
                     </div>
                     <div class="ps1-talk-arr">&#x203A;</div>
                   </div>
                 </div>
                 <div class="ps-bnav">
-                  <div class="ps-bnav-item active"><span>&#x1F3E0;</span><span>Home</span></div>
-                  <div class="ps-bnav-item"><span>&#x1F4AC;</span><span>Soulio</span></div>
-                  <div class="ps-bnav-item"><span>&#x1F4CA;</span><span>Insights</span></div>
-                  <div class="ps-bnav-item"><span>&#x1F464;</span><span>Profile</span></div>
+                  <div class="ps-bnav-item active">
+                    <span>&#x1F3E0;</span><span>Home</span>
+                  </div>
+                  <div class="ps-bnav-item">
+                    <span>&#x1F4AC;</span><span>Soulio</span>
+                  </div>
+                  <div class="ps-bnav-item">
+                    <span>&#x1F4CA;</span><span>Insights</span>
+                  </div>
+                  <div class="ps-bnav-item">
+                    <span>&#x1F464;</span><span>Profile</span>
+                  </div>
                 </div>
               </div>
 
@@ -1929,17 +1958,27 @@
                   <div class="ps2-msgs">
                     <div>
                       <div class="ps2-sender">&#x1F49C; Soulio</div>
-                      <div class="ps2-bai">Hey Katalina! How are you feeling today? I noticed some ups and downs recently, particularly around sleep and money. I&#x27;m here to chat.</div>
+                      <div class="ps2-bai">
+                        Hey Katalina! How are you feeling today? I noticed some
+                        ups and downs recently, particularly around sleep and
+                        money. I&#x27;m here to chat.
+                      </div>
                     </div>
                     <div class="ps2-buser">Hey soulio</div>
                     <div>
                       <div class="ps2-sender">&#x1F49C; Soulio</div>
-                      <div class="ps2-bai">Hey Katalina! It&#x27;s great to hear from you. How&#x27;s your day going so far?</div>
+                      <div class="ps2-bai">
+                        Hey Katalina! It&#x27;s great to hear from you.
+                        How&#x27;s your day going so far?
+                      </div>
                     </div>
                     <div class="ps2-buser">I&#x27;m great, what about you?</div>
                     <div>
                       <div class="ps2-sender">&#x1F49C; Soulio</div>
-                      <div class="ps2-bai">I&#x27;m glad you&#x27;re feeling great! Is there anything specific on your mind today?</div>
+                      <div class="ps2-bai">
+                        I&#x27;m glad you&#x27;re feeling great! Is there
+                        anything specific on your mind today?
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -1948,10 +1987,18 @@
                   <div class="ps2-send">&#x203A;</div>
                 </div>
                 <div class="ps-bnav">
-                  <div class="ps-bnav-item"><span>&#x1F3E0;</span><span>Home</span></div>
-                  <div class="ps-bnav-item active"><span>&#x1F4AC;</span><span>Soulio</span></div>
-                  <div class="ps-bnav-item"><span>&#x1F4CA;</span><span>Insights</span></div>
-                  <div class="ps-bnav-item"><span>&#x1F464;</span><span>Profile</span></div>
+                  <div class="ps-bnav-item">
+                    <span>&#x1F3E0;</span><span>Home</span>
+                  </div>
+                  <div class="ps-bnav-item active">
+                    <span>&#x1F4AC;</span><span>Soulio</span>
+                  </div>
+                  <div class="ps-bnav-item">
+                    <span>&#x1F4CA;</span><span>Insights</span>
+                  </div>
+                  <div class="ps-bnav-item">
+                    <span>&#x1F464;</span><span>Profile</span>
+                  </div>
                 </div>
               </div>
 
@@ -1984,15 +2031,38 @@
                   </div>
                   <div class="ps3-chart-card">
                     <div class="ps3-ct-title">Mood this week</div>
-                    <div class="ps3-ct-sub">Daily average &mdash; tap a bar to see details</div>
+                    <div class="ps3-ct-sub">
+                      Daily average &mdash; tap a bar to see details
+                    </div>
                     <div class="ps3-bars">
-                      <div class="ps3-bar-col"><div class="ps3-bar-ico"></div><div class="ps3-bar-empty"></div></div>
-                      <div class="ps3-bar-col"><div class="ps3-bar-ico"></div><div class="ps3-bar-empty"></div></div>
-                      <div class="ps3-bar-col"><div class="ps3-bar-ico"></div><div class="ps3-bar-empty"></div></div>
-                      <div class="ps3-bar-col"><div class="ps3-bar-ico"></div><div class="ps3-bar-empty"></div></div>
-                      <div class="ps3-bar-col"><div class="ps3-bar-ico"></div><div class="ps3-bar-empty"></div></div>
-                      <div class="ps3-bar-col"><div class="ps3-bar-ico"></div><div class="ps3-bar-empty"></div></div>
-                      <div class="ps3-bar-col"><div class="ps3-bar-ico">&#x1F610;</div><div class="ps3-bar-fill" style="height:52px"></div></div>
+                      <div class="ps3-bar-col">
+                        <div class="ps3-bar-ico"></div>
+                        <div class="ps3-bar-empty"></div>
+                      </div>
+                      <div class="ps3-bar-col">
+                        <div class="ps3-bar-ico"></div>
+                        <div class="ps3-bar-empty"></div>
+                      </div>
+                      <div class="ps3-bar-col">
+                        <div class="ps3-bar-ico"></div>
+                        <div class="ps3-bar-empty"></div>
+                      </div>
+                      <div class="ps3-bar-col">
+                        <div class="ps3-bar-ico"></div>
+                        <div class="ps3-bar-empty"></div>
+                      </div>
+                      <div class="ps3-bar-col">
+                        <div class="ps3-bar-ico"></div>
+                        <div class="ps3-bar-empty"></div>
+                      </div>
+                      <div class="ps3-bar-col">
+                        <div class="ps3-bar-ico"></div>
+                        <div class="ps3-bar-empty"></div>
+                      </div>
+                      <div class="ps3-bar-col">
+                        <div class="ps3-bar-ico">&#x1F610;</div>
+                        <div class="ps3-bar-fill" style="height: 52px"></div>
+                      </div>
                     </div>
                     <div class="ps3-days">
                       <div class="ps3-day">Sat</div>
@@ -2004,28 +2074,90 @@
                       <div class="ps3-day">Fri</div>
                     </div>
                     <div class="ps3-legend">
-                      <div class="ps3-leg-item"><div class="ps3-leg-dot" style="background:#ef4444"></div>Rough</div>
-                      <div class="ps3-leg-item"><div class="ps3-leg-dot" style="background:#f97316"></div>Low</div>
-                      <div class="ps3-leg-item"><div class="ps3-leg-dot" style="background:#6b7280"></div>Neutral</div>
-                      <div class="ps3-leg-item"><div class="ps3-leg-dot" style="background:#10b981"></div>Good</div>
-                      <div class="ps3-leg-item"><div class="ps3-leg-dot" style="background:#7c5cfc"></div>Great</div>
+                      <div class="ps3-leg-item">
+                        <div
+                          class="ps3-leg-dot"
+                          style="background: #ef4444"
+                        ></div>
+                        Rough
+                      </div>
+                      <div class="ps3-leg-item">
+                        <div
+                          class="ps3-leg-dot"
+                          style="background: #f97316"
+                        ></div>
+                        Low
+                      </div>
+                      <div class="ps3-leg-item">
+                        <div
+                          class="ps3-leg-dot"
+                          style="background: #6b7280"
+                        ></div>
+                        Neutral
+                      </div>
+                      <div class="ps3-leg-item">
+                        <div
+                          class="ps3-leg-dot"
+                          style="background: #10b981"
+                        ></div>
+                        Good
+                      </div>
+                      <div class="ps3-leg-item">
+                        <div
+                          class="ps3-leg-dot"
+                          style="background: #7c5cfc"
+                        ></div>
+                        Great
+                      </div>
                     </div>
                   </div>
                   <div class="ps3-tags-card">
                     <div class="ps3-tags-title">What&#x27;s on your mind</div>
                     <div class="ps3-tags-sub">Most frequent check-in tags</div>
                     <div class="ps3-tag-bars">
-                      <div><div class="ps3-tag-top"><span class="ps3-tag-name">Money</span><span class="ps3-tag-count">3x</span></div><div class="ps3-tag-track"><div class="ps3-tag-fill" style="width:100%"></div></div></div>
-                      <div><div class="ps3-tag-top"><span class="ps3-tag-name">Work</span><span class="ps3-tag-count">2x</span></div><div class="ps3-tag-track"><div class="ps3-tag-fill" style="width:65%"></div></div></div>
-                      <div><div class="ps3-tag-top"><span class="ps3-tag-name">Sleep</span><span class="ps3-tag-count">2x</span></div><div class="ps3-tag-track"><div class="ps3-tag-fill" style="width:55%"></div></div></div>
+                      <div>
+                        <div class="ps3-tag-top">
+                          <span class="ps3-tag-name">Money</span
+                          ><span class="ps3-tag-count">3x</span>
+                        </div>
+                        <div class="ps3-tag-track">
+                          <div class="ps3-tag-fill" style="width: 100%"></div>
+                        </div>
+                      </div>
+                      <div>
+                        <div class="ps3-tag-top">
+                          <span class="ps3-tag-name">Work</span
+                          ><span class="ps3-tag-count">2x</span>
+                        </div>
+                        <div class="ps3-tag-track">
+                          <div class="ps3-tag-fill" style="width: 65%"></div>
+                        </div>
+                      </div>
+                      <div>
+                        <div class="ps3-tag-top">
+                          <span class="ps3-tag-name">Sleep</span
+                          ><span class="ps3-tag-count">2x</span>
+                        </div>
+                        <div class="ps3-tag-track">
+                          <div class="ps3-tag-fill" style="width: 55%"></div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
                 <div class="ps-bnav">
-                  <div class="ps-bnav-item"><span>&#x1F3E0;</span><span>Home</span></div>
-                  <div class="ps-bnav-item"><span>&#x1F4AC;</span><span>Soulio</span></div>
-                  <div class="ps-bnav-item active"><span>&#x1F4CA;</span><span>Insights</span></div>
-                  <div class="ps-bnav-item"><span>&#x1F464;</span><span>Profile</span></div>
+                  <div class="ps-bnav-item">
+                    <span>&#x1F3E0;</span><span>Home</span>
+                  </div>
+                  <div class="ps-bnav-item">
+                    <span>&#x1F4AC;</span><span>Soulio</span>
+                  </div>
+                  <div class="ps-bnav-item active">
+                    <span>&#x1F4CA;</span><span>Insights</span>
+                  </div>
+                  <div class="ps-bnav-item">
+                    <span>&#x1F464;</span><span>Profile</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -2347,7 +2479,20 @@
     <footer role="contentinfo">
       <div class="footer-line" aria-hidden="true"><span></span></div>
       <div class="footer-inner">
-        <a href="index.html" class="footer-logo">SOULIO</a>
+        <a href="index.html" class="footer-logo" aria-label="Soulio">
+          <svg width="176" height="46" viewBox="0 0 220 58" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="sfoot" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#c084fc"/><stop offset="48%" stop-color="#7C5CFC"/><stop offset="100%" stop-color="#4338ca"/></linearGradient>
+              <filter id="sfglow"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            </defs>
+            <rect x="1" y="3" width="52" height="52" rx="14" fill="url(#sfoot)" filter="url(#sfglow)"/>
+            <rect x="1" y="3" width="52" height="52" rx="14" fill="white" opacity="0.05"/>
+            <ellipse cx="18" cy="16" rx="9" ry="6" fill="white" opacity="0.17" transform="rotate(-22 18 16)"/>
+            <text x="27" y="42" font-family="'Plus Jakarta Sans',sans-serif" font-size="29" font-weight="800" fill="white" text-anchor="middle">S</text>
+            <text x="66" y="36" font-family="'Plus Jakarta Sans',sans-serif" font-size="24" font-weight="800" fill="#f0eeff" letter-spacing="-0.5">SOULIO</text>
+            <text x="67" y="51" font-family="'Plus Jakarta Sans',sans-serif" font-size="8" font-weight="600" fill="#8b82b0" letter-spacing="3">KNOW YOUR SOUL</text>
+          </svg>
+        </a>
         <nav class="footer-links" aria-label="Footer navigation">
           <a href="#features">Features</a>
           <a href="#pricing">Pricing</a>
